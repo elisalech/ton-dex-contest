@@ -1,0 +1,69 @@
+/*Fonts and font sizes start*/
+
+@import 'reset.css';
+@import 'fonts.css';
+
+* {
+  box-sizing: border-box;
+}
+
+a,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: 'mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --color-primary: #0088cc;
+  --color-accent: #0072ab;
+  --color-white: #ffffff;
+  --color-black: #333333;
+
+  --bg-color-primary: #ffffff;
+  --bg-color-secondary: #1b243d;
+  --bg-color-tertiary: #303757;
+
+  --text-color-primary: #303757;
+  --text-color-secondary: #333;
+  --text-color-gray: rgba(48, 55, 87, 0.56);
+
+  /* --bg-primary: #151c29;
+  --bg-secondary: #222b3d;
+  --bg-quaternary: #343e52;
+  --bg-tertiary: #2b3447;
+  --fg-primary: #fff;
+  --fg-secondary: #c5cbd6;
+  --ac-primary: #45aef5; */
+}
+
+[data-theme='dark'] {
+  --color-primary: #0088cc;
+  --color-accent: #0072ab;
+
+  --bg-color-primary: #1b243d;
+
+  --bg-color-secondary: #1b243d;
+  --bg-color-tertiary: #303757;
+
+  --text-color-primary: #ffffff;
+  --text-color-secondary: #333;
+  --text-color-gray: #c5cbd6;
+
+  /* --primary-color: #9a97f3;
+  --secondary-color: #818cab;
+  --font-color: #e1e1ff;
+  --bg-color: #161625;
+  --heading-color: #818cab; */
+}
