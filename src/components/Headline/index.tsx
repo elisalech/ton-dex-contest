@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import classNames from 'classnames';
+
+import classnames from 'libs/classnames';
 
 import styles from './styles.module.css';
 
@@ -8,7 +9,7 @@ interface HeadlineProps {
 }
 
 const Headline: FC<HeadlineProps> = props => {
-  const classes = classNames(styles.headline, styles.h1, props.className);
+  const classes = classnames(styles.headline, styles.h1, props.className);
 
   return <h1 {...props} className={classes} />;
 };

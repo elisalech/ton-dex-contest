@@ -15,11 +15,11 @@ export default function SwapModule() {
       </Button>
     </div>
   );
+
   return (
     <Card footerComponent={renderFooter()}>
-      <Headline>Ton dex</Headline>
-      <Text>Hello ton!</Text>
-      <SwapInputPanel />
+      <Headline>Swap</Headline>
+      <SwapInputPanel token />
       <Text>v</Text>
       <SwapInputPanel />
     </Card>

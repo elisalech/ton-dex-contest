@@ -1,0 +1,8 @@
+.wrap {
+  display: flex;
+  align-items: center;
+}
+
+.wrap svg {
+  margin-right: 12px;
+}

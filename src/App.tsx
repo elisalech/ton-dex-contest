@@ -1,9 +1,12 @@
-import SwapModule from 'Modules/Swap';
+import Pages from 'Pages';
+
+import Navbar from 'components/Navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <SwapModule />
+      <Navbar />
+      <Pages />
     </div>
   );
 }

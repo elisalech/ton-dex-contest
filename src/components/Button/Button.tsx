@@ -1,11 +1,10 @@
 import { FC, isValidElement, ReactNode } from 'react';
-import classNames from 'classnames';
+
+import classnames from 'libs/classnames';
 
 import styles from './styles.module.css';
 
-enum ButtonVariants {
-  primary = 'primary',
-}
+type ButtonVariants = 'primary' | 'text';
 
 interface ButtonProps {
   className?: string;
@@ -18,13 +17,13 @@ export const Button: FC<ButtonProps> = ({
   children,
   startIcon,
   endIcon,
-  variant = ButtonVariants.primary,
+  variant = 'primary',
   ...props
 }) => {
-  const classes = classNames(styles.common, styles[variant], props.className);
+  const classes = classnames(styles.common, styles[variant], props.className);
 
   return (
-    <button className={classes} {...props}>
+    <button {...props} className={classes}>
       {isValidElement(startIcon) && (
         <div className={styles['start-wrap']}>{startIcon}</div>
       )}

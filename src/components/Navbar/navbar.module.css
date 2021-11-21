@@ -1,0 +1,19 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  padding: 18px 16px;
+}
+
+.nav-wrap {
+  margin-left: 40px;
+  display: flex;
+}
+
+.nav-link {
+  color: var(--color-primary);
+}
+
+:global(.active) .nav-link {
+  color: var(--text-color-primary);
+}
