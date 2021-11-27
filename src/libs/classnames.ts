@@ -5,8 +5,6 @@ interface ArgumentArray extends Array<Argument> {}
 
 /**
  * copy-paste implementation of https://github.com/JedWatson/classnames/
- *
- *
  */
 export default function classnames(...args: ArgumentArray): string {
   const classes = [];

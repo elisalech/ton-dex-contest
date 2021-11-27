@@ -7,10 +7,14 @@ import { Button } from 'components/Button/Button';
 import { SelectCurrencyButton } from './SelectCurrencyButton';
 
 interface SwapInputPanelProps {
+  handleClickSelectButton: () => void;
   token?: any;
 }
 
-export default function SwapInputPanel({ token }: SwapInputPanelProps) {
+export default function SwapInputPanel({
+  token,
+  handleClickSelectButton,
+}: SwapInputPanelProps) {
   const [numValue, setNumValue] = useState('');
 
   return (
@@ -18,7 +22,7 @@ export default function SwapInputPanel({ token }: SwapInputPanelProps) {
       <NumericalInput value={numValue} onChange={setNumValue} />
       {token && <Button variant="text">MAX</Button>}
 
-      <SelectCurrencyButton token={token} />
+      <SelectCurrencyButton onClick={handleClickSelectButton} token={token} />
     </div>
   );
 }

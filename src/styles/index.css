@@ -30,6 +30,7 @@ body {
   --color-accent: #0072ab;
   --color-white: #ffffff;
   --color-black: #333333;
+  --color-border: rgb(48 55 87 / 16%);
 
   --bg-color-primary: #ffffff;
   --bg-color-secondary: #1b243d;
@@ -38,6 +39,8 @@ body {
   --text-color-primary: #303757;
   --text-color-secondary: #333;
   --text-color-gray: rgba(48, 55, 87, 0.56);
+
+  --zIndex-modal: 20;
 
   /* --bg-primary: #151c29;
   --bg-secondary: #222b3d;

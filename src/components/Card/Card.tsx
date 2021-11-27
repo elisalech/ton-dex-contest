@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import styles from './styles.module.css';
+import styles from './card.module.css';
 
 interface CardProps {
   footerComponent?: ReactNode;
