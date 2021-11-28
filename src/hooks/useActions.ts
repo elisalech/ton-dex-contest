@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
 import { bindActionCreators } from 'redux';
-import { useDispatch } from 'react-redux';
 
-export function useActions(actions: any[], dependencies = []) {
-  const dispatch = useDispatch();
+import { useAppDispatch } from './useAppDispatch';
+
+export function useActions<T>(actions: T[], dependencies = []) {
+  const dispatch = useAppDispatch();
 
   return useMemo(
+    // @ts-ignore
     () => actions.map(a => bindActionCreators(a, dispatch)),
     [dispatch, ...dependencies],
   );

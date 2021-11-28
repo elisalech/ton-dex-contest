@@ -11,6 +11,9 @@ import Text from 'components/Text';
 import styles from './search_modal.module.css';
 import IStar from 'components/Icons/IStar';
 import { Column, Row } from 'components/Layout';
+import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useFavoriteCurrencies } from 'hooks/useFavoriteCurrencies';
+import { addWatchlistToken, removeWatchlistToken } from 'store/user/actions';
 
 interface CurrencyRowProps {
   currency: Currency;
@@ -18,12 +21,14 @@ interface CurrencyRowProps {
   isSelected: boolean;
   otherSelected?: boolean;
   style: CSSProperties;
+  toggleFavourite: (currency: Currency, isFavourite: boolean) => void;
 }
 
 function CurrencyRow({
   currency,
   onSelect,
   isSelected,
+  toggleFavourite,
   // otherSelected,
   style,
 }: CurrencyRowProps) {
@@ -34,7 +39,10 @@ function CurrencyRow({
   // const customAdded = useIsUserAddedToken(currency);
   // const balance = useCurrencyBalance(account ?? undefined, currency);
 
-  const classes = classnames(styles['currency-row'], {
+  const { favoriteCurrenciesMap } = useFavoriteCurrencies();
+  const isFavourite = !!favoriteCurrenciesMap[currency.address];
+
+  const classes = classnames(styles.row, {
     [`${styles['currency-row-disabled']}`]: true,
     [`${styles['currency-row-selected']}`]: true,
   });
@@ -47,17 +55,20 @@ function CurrencyRow({
       <Row className={styles['row-left']}>
         <CurrencyLogo currency={currency} />
         <Column className={styles['row-left-name']}>
-          <Text>{currency.name}</Text>
-          <Text>
+          <Text color="secondary" weight="bold">
+            {currency.name}
+          </Text>
+          <Text size="small" color="gray">
             {currency.symbol}
-            {/* {!isOnSelectedList && customAdded && 'Added by user •'}{' '}
-          {currency.name} */}
           </Text>
         </Column>
       </Row>
       <Row>
-        <Text>0.0</Text>
-        <IStar selected={false} />
+        <Text color="primary">0.0</Text>
+        <IStar
+          selected={isFavourite}
+          onClick={() => toggleFavourite(currency, isFavourite)}
+        />
       </Row>
       {/* <RowFixed style={{ justifySelf: 'flex-end' }}>
         {balance ? (
@@ -88,6 +99,17 @@ export default function CurrencyList({
     (index: number, data: Currency[]) => data[index].address,
     [],
   );
+  const dispatch = useAppDispatch();
+
+  const toggleFavourite = useCallback(
+    (currency: Currency, isFavourite: boolean) => {
+      const handlerAction = isFavourite
+        ? removeWatchlistToken
+        : addWatchlistToken;
+      dispatch(handlerAction(currency));
+    },
+    [],
+  );
 
   const RenderListRow = useCallback(
     ({
@@ -101,12 +123,12 @@ export default function CurrencyList({
     }) => {
       const currency = data[index];
       const handleSelect = () => {
-        console.log('SELECT', currency);
         onCurrencySelect(currency);
       };
 
       return (
         <CurrencyRow
+          toggleFavourite={toggleFavourite}
           style={style}
           currency={currency}
           isSelected={false}

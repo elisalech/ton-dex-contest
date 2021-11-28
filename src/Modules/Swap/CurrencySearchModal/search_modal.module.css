@@ -4,6 +4,10 @@
   /* padding: 10px; */
 }
 
-.currency-row {
+.row {
   padding: 10px;
+}
+
+.row:hover {
+  background-color: lightblue;
 }

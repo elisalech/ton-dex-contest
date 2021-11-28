@@ -4,9 +4,16 @@ import classnames from 'libs/classnames';
 
 import styles from './text.module.css';
 
-type TextWeight = 'regular' | 'bold' | 'black';
+type TextWeight = 'regular' | 'bold' | 'extraBold';
 type TextSize = 'medium' | 'small' | 'big';
-type TextColor = 'primary' | 'secondary' | 'gray' | 'contrast';
+type TextColor =
+  | 'primary'
+  | 'secondary'
+  | 'gray'
+  | 'black'
+  | 'white'
+  | 'blue'
+  | 'contrast';
 
 interface IText {
   inline?: boolean;

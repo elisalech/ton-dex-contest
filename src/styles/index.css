@@ -38,6 +38,10 @@ body {
 
   --text-color-primary: #303757;
   --text-color-secondary: #333;
+  --text-color-blue: #0088cc;
+  --text-color-black: #000;
+  --text-color-white: #fff;
+  --text-color-contrast: #000;
   --text-color-gray: rgba(48, 55, 87, 0.56);
 
   --zIndex-modal: 20;
@@ -60,9 +64,15 @@ body {
   --bg-color-secondary: #1b243d;
   --bg-color-tertiary: #303757;
 
-  --text-color-primary: #ffffff;
+  /*
+  TODO: change colors to dark theme
+  --text-color-primary: #303757;
   --text-color-secondary: #333;
-  --text-color-gray: #c5cbd6;
+  --text-color-blue: #0088cc;
+  --text-color-black: #000;
+  --text-color-white: #fff;
+  --text-color-contrast: #000;
+  --text-color-gray: rgba(48, 55, 87, 0.56); */
 
   /* --primary-color: #9a97f3;
   --secondary-color: #818cab;

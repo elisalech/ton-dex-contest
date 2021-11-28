@@ -9,6 +9,8 @@ import { InjectedProps } from './types';
 
 import styles from './modal.module.css';
 import classnames from 'libs/classnames';
+import { Row } from 'components/Layout';
+import { Card } from 'components/Card/Card';
 
 interface Props extends InjectedProps {
   title: string;
@@ -25,8 +27,8 @@ const Modal: React.FC<Props> = ({
   className,
   showCloseButton = true,
 }) => (
-  <div className={classnames(styles.base, className)}>
-    <div className={styles.header}>
+  <Card className={classnames(styles.base, className)}>
+    <Row className={styles.header}>
       <div>
         {onBack && (
           <Button variant="text" onClick={onBack} area-label="go back">
@@ -43,9 +45,9 @@ const Modal: React.FC<Props> = ({
           <IClose />
         </Button>
       )}
-    </div>
+    </Row>
     <div>{children}</div>
-  </div>
+  </Card>
 );
 
 export default Modal;

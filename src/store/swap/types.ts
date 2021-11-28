@@ -13,3 +13,8 @@ export interface SwapState {
     currencyId: string | undefined;
   };
 }
+
+export interface ITypeInput {
+  field: Field;
+  value: string;
+}

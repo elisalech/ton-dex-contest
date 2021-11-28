@@ -9,8 +9,6 @@ interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Overlay({ shown, ...rest }: OverlayProps) {
-  // @ts-ignore
-  // rest?.onClick();
   const classes = classnames(styles.overlay, {
     [`${styles.overlay__shown}`]: shown,
   });

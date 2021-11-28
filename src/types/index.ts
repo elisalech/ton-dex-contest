@@ -7,3 +7,5 @@ export interface Currency {
   decimals: number;
   logoURI: string;
 }
+
+export type CurrencyMap = { [address: Address]: Currency };
