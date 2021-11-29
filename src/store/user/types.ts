@@ -8,5 +8,5 @@ export enum ThemeTypes {
 export interface UserState {
   watchlistTokens: CurrencyMap;
   isDark: boolean;
-  adress: Address | null;
+  address: Address | null;
 }

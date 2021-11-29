@@ -1,4 +1,4 @@
-import { CSSProperties, FC, HTMLAttributes } from 'react';
+import { CSSProperties, ElementType, FC, HTMLAttributes } from 'react';
 
 import classnames from 'libs/classnames';
 
@@ -8,6 +8,7 @@ interface RowProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
+  as?: ElementType;
 }
 
 export const Row: FC<RowProps> = ({
@@ -16,12 +17,13 @@ export const Row: FC<RowProps> = ({
   justifyContent = 'space-between',
   alignItems = 'center',
   className,
+  as: Tag = 'div',
   ...props
 }) => (
-  <div
+  <Tag
     style={{ ...style, justifyContent, alignItems }}
     className={classnames(styles.row, className)}
     {...props}>
     {children}
-  </div>
+  </Tag>
 );

@@ -1,10 +1,10 @@
-import { Currency } from 'types';
+import { Address, Currency } from 'types';
 import { ThemeTypes } from './types';
 
 export enum UserActionTypes {
   setTheme = 'USER/SET_THEME',
   toggleTheme = 'USER/TOGGLE_THEME',
-  setUserAdress = 'USER/SET_USER_ADRESS',
+  setUserAddress = 'USER/SET_USER_ADDRESS',
   addWatchlistToken = 'USER/ADD_WATCHLIST_TOKEN',
   removeWatchlistToken = 'USER/REMOVE_WATCHLIST_TOKEN',
   resetUserState = 'USER/RESET_USER_STATE',
@@ -12,6 +12,11 @@ export enum UserActionTypes {
 
 export const setTheme = (payload: ThemeTypes) => ({
   type: UserActionTypes.setTheme,
+  payload,
+});
+
+export const setUserAddress = (payload: Address) => ({
+  type: UserActionTypes.setUserAddress,
   payload,
 });
 

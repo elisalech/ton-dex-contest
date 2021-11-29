@@ -1,9 +1,5 @@
-import SwapModule from 'Modules/Swap';
+import SwapView from 'Views/Swap';
 
 export default function SwapPage() {
-  return (
-    <div>
-      <SwapModule />
-    </div>
-  );
+  return <SwapView />;
 }

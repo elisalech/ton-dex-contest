@@ -4,6 +4,9 @@ import { AppRoutes } from 'Pages/types';
 
 import TonLogo from 'components/TonLogo';
 import Text from 'components/Text';
+import { Row } from 'components/Layout';
+
+import WalletButton from './WalletButton';
 
 import styles from './navbar.module.css';
 
@@ -14,7 +17,7 @@ const navlinks = [
 
 export default function Navbar() {
   return (
-    <header className={styles.container}>
+    <Row as="header" className={styles.container}>
       <NavLink to={AppRoutes.HOME}>
         <TonLogo />
       </NavLink>
@@ -27,6 +30,7 @@ export default function Navbar() {
           </NavLink>
         ))}
       </nav>
-    </header>
+      <WalletButton />
+    </Row>
   );
 }

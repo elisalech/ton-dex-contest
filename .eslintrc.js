@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['react-app', 'airbnb-typescript'],
+  extends: ['react-app', 'airbnb-typescript', 'prettier'],
   parser: '@typescript-eslint/parser',
   plugins: ['react', '@typescript-eslint'],
   rules: {

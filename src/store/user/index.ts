@@ -7,7 +7,7 @@ import { ThemeTypes, UserState } from './types';
 const initialState: UserState = {
   isDark: false,
   watchlistTokens: {},
-  adress: null,
+  address: null,
 };
 
 const userReducer: Reducer<UserState> = (state = initialState, action) => {
@@ -22,28 +22,28 @@ const userReducer: Reducer<UserState> = (state = initialState, action) => {
         ...state,
         isDark: (action.payload as ThemeTypes) === ThemeTypes.dark,
       };
-    case UserActionTypes.setUserAdress:
+    case UserActionTypes.setUserAddress:
       return {
         ...state,
-        adress: action.payload,
+        address: action.payload,
       };
 
     case UserActionTypes.addWatchlistToken:
-      const { address: addAdress } = action.payload as Currency;
+      const { address: addAddress } = action.payload as Currency;
 
       return {
         ...state,
         watchlistTokens: {
           ...state.watchlistTokens,
-          [addAdress]: action.payload,
+          [addAddress]: action.payload,
         },
       };
 
     case UserActionTypes.removeWatchlistToken:
-      const { address: removeAdress } = action.payload as Currency;
+      const { address: removeAddress } = action.payload as Currency;
 
       const nextWatchlistTokens = { ...state.watchlistTokens };
-      delete nextWatchlistTokens[removeAdress];
+      delete nextWatchlistTokens[removeAddress];
 
       return {
         ...state,
