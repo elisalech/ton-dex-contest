@@ -6,3 +6,23 @@
 .wrap svg {
   margin-right: 12px;
 }
+
+.wrap:hover :global(.diamond) {
+  animation-duration: 1s;
+  animation-name: logo-rotate;
+}
+
+@keyframes logo-rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  25% {
+    transform: rotateZ(-5deg) scale(1.01);
+  }
+  75% {
+    transform: rotateZ(5deg) scale(1.01);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}

@@ -1,3 +1,5 @@
+import { Currency } from 'types';
+
 export enum Field {
   FROM = 'from',
   TO = 'to',
@@ -6,12 +8,8 @@ export enum Field {
 export interface SwapState {
   independentField: Field;
   typedValue: string;
-  [Field.FROM]: {
-    currencyId: string | undefined;
-  };
-  [Field.TO]: {
-    currencyId: string | undefined;
-  };
+  [Field.FROM]: Currency | undefined;
+  [Field.TO]: Currency | undefined;
 }
 
 export interface ITypeInput {

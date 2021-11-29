@@ -1,43 +1,43 @@
-import { confirmTransaction } from 'mocks/confirmService';
-import { useModal } from 'widgets/Modal';
+// import { confirmTransaction } from 'mocks/confirmService';
+
+import { Field } from 'store/swap/types';
 
 import { Button } from 'components/Button/Button';
 import { Card } from 'components/Card/Card';
 import Headline from 'components/Headline';
 import IWallet from 'components/Icons/IWallet';
 import Text from 'components/Text';
+
 import SwapInputPanel from './SwapInputPanel';
 
 import styles from './styles.module.css';
-import CurrencySearchModal from './CurrencySearchModal/CurrencySearchModal';
+import { useUserState } from 'hooks/useUserState';
 
-export default function SwapModule() {
-  const [openModal] = useModal(<CurrencySearchModal />);
-
-  const handleConnect = () => {
-    confirmTransaction('Do you want to connect your wallet?')
-      .then(() => {
-        console.log('Wallet connected!');
-      })
-      .catch(() => console.log("Couldn't connect wallet"));
-  };
+export default function SwapView() {
+  const { handleConnect, address } = useUserState();
 
   const renderFooter = () => (
     <div className={styles.footer}>
-      <Button
-        onClick={handleConnect}
-        startIcon={<IWallet width={24} height={24} />}>
-        Connect wallet
-      </Button>
+      {address ? (
+        <Button
+          onClick={handleConnect}
+          startIcon={<IWallet width={16} height={16} />}>
+          Buy
+        </Button>
+      ) : (
+        <Button onClick={handleConnect}>Connect wallet</Button>
+      )}
     </div>
   );
 
   return (
-    <Card footerComponent={renderFooter()}>
-      <Headline>Swap</Headline>
-      <SwapInputPanel handleClickSelectButton={openModal} token />
-      <Text>v</Text>
-      <SwapInputPanel handleClickSelectButton={openModal} />
-    </Card>
+    <main className={styles.container}>
+      <Card footerComponent={renderFooter()} className={styles.swapCard}>
+        <Headline>Swap</Headline>
+        <SwapInputPanel field={Field.FROM} />
+        <Text>v</Text>
+        <SwapInputPanel field={Field.TO} />
+      </Card>
+    </main>
   );
 }

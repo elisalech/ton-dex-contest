@@ -9,6 +9,7 @@ import styles from './search_modal.module.css';
 import CurrencyList from './CurrencyList';
 import { TOKENS_DATA } from 'mocks/tokens';
 import FavouriteList from './FavouriteList';
+import { useSwapActions } from 'hooks/useSwapActions';
 
 interface CurrencySearchModalProps {
   onDismiss?: () => void;
@@ -16,6 +17,7 @@ interface CurrencySearchModalProps {
 
 export default function CurrencySearchModal(props: CurrencySearchModalProps) {
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const { selectFieldCurrency } = useSwapActions();
 
   const fixedList = useRef<FixedSizeList>(null);
 
@@ -32,7 +34,7 @@ export default function CurrencySearchModal(props: CurrencySearchModalProps) {
         <CurrencyList
           // @ts-ignore
           fixedListRef={fixedList}
-          onCurrencySelect={console.log}
+          onCurrencySelect={selectFieldCurrency}
           height={450}
           currencies={TOKENS_DATA}
         />

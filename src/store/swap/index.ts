@@ -6,31 +6,39 @@ import { Field, ITypeInput, SwapState } from './types';
 const initialState: SwapState = {
   independentField: Field.FROM,
   typedValue: '',
-  [Field.FROM]: {
-    currencyId: '',
-  },
-  [Field.TO]: {
-    currencyId: '',
-  },
+  [Field.FROM]: undefined,
+  [Field.TO]: undefined,
 };
 
 const swapReducer: Reducer<SwapState> = (state = initialState, action) => {
   switch (action.type) {
     case SwapActionTypes.typeInput:
       const { value, field } = action.payload as ITypeInput;
-
       return {
         ...state,
         typedValue: value,
         independentField: field,
       };
+
+    case SwapActionTypes.selectCurrency:
+      return {
+        ...state,
+        [state.independentField]: action.payload,
+      };
+
+    case SwapActionTypes.selectField:
+      return {
+        ...state,
+        independentField: action.payload,
+      };
+
     case SwapActionTypes.switchCurrencies:
       return {
         ...state,
         independentField:
           state.independentField === Field.FROM ? Field.TO : Field.FROM,
-        [Field.FROM]: { currencyId: state[Field.TO].currencyId },
-        [Field.TO]: { currencyId: state[Field.FROM].currencyId },
+        [Field.FROM]: state[Field.TO],
+        [Field.TO]: state[Field.FROM],
       };
     default:
       return state;
