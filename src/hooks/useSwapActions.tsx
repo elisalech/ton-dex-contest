@@ -1,12 +1,18 @@
 import { useCallback } from 'react';
-import { selectCurrency, selectField } from 'store/swap/actions';
 
-import { Field } from 'store/swap/types';
 import { Currency } from 'types';
+
+import {
+  selectCurrency,
+  selectField,
+  switchCurrencies,
+} from 'store/swap/actions';
+import { Field } from 'store/swap/types';
+
 import CurrencySearchModal from 'Views/Swap/CurrencySearchModal/CurrencySearchModal';
-import { useModal } from 'widgets/Modal';
 
 import { useAppDispatch } from './useAppDispatch';
+import useModal from './useModal';
 
 export const useSwapActions = () => {
   const dispatch = useAppDispatch();
@@ -29,8 +35,13 @@ export const useSwapActions = () => {
     [openModal],
   );
 
+  const handleSwitchFields = useCallback(() => {
+    dispatch(switchCurrencies());
+  }, [openModal]);
+
   return {
     handleClickSelectButton,
     selectFieldCurrency,
+    handleSwitchFields,
   };
 };

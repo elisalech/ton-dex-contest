@@ -5,9 +5,14 @@ class PoolsService {
     const res = await fetch(
       'https://governance.1inch.io/v1.2/56/protocol/pairs',
     );
-    const json = await res.json();
+    const poolsData: PoolData[] = await res.json();
 
-    return json as PoolData[];
+    // just to simplify demo presentation
+    const selectedPools = poolsData
+      .sort((a, b) => parseFloat(b.reserveUSD) - parseFloat(a.reserveUSD))
+      .slice(0, 100);
+
+    return selectedPools;
   }
 }
 
