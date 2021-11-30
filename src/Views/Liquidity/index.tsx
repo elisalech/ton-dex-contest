@@ -17,17 +17,21 @@ import { Separator } from 'components/Separator/Separator';
 import styles from './styles.module.css';
 import StatsCard from 'components/StatsCard';
 import { useLiquidityInfo } from 'hooks/useLiquidityInfo';
+import { useLiquidityActions } from 'hooks/useLiquidityActions';
 
 export default function LiquidityView() {
   useFetchPools();
   const { handleConnect, address } = useUserState();
   const { isProvideMode } = useCreateLiquidityMode();
   const statsData = useLiquidityInfo();
+  const { handleCreateLiquidity } = useLiquidityActions();
+
+  const label = isProvideMode ? 'Provide' : 'Create';
 
   return (
     <main className={styles.container}>
       <Card className={styles.card}>
-        <Headline>{isProvideMode ? 'Provide' : 'Create'} Liquidity</Headline>
+        <Headline>{label} Liquidity</Headline>
         <div className={styles.inputs_wrap}>
           <LiquidityInputPanel field={Field.FROM} />
           <Button className={styles.addIcon} variant="text">
@@ -40,9 +44,9 @@ export default function LiquidityView() {
         <div className={styles.footer}>
           {address ? (
             <Button
-              onClick={handleConnect}
+              onClick={handleCreateLiquidity}
               startIcon={<IWallet width={22} height={22} />}>
-              Buy
+              {label}
             </Button>
           ) : (
             <Button onClick={handleConnect}>Connect wallet</Button>

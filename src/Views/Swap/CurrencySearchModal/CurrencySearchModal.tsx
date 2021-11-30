@@ -29,7 +29,6 @@ export default function CurrencySearchModal(props: CurrencySearchModalProps) {
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   }, []);
-  // useDebounce;
 
   return (
     <Modal onDismiss={props.onDismiss} title="Select a Token">
