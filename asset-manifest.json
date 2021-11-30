@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/ton-dex-contest/static/css/main.cff6ea26.chunk.css",
+    "main.js": "/ton-dex-contest/static/js/main.d8269ec7.chunk.js",
+    "main.js.map": "/ton-dex-contest/static/js/main.d8269ec7.chunk.js.map",
+    "runtime-main.js": "/ton-dex-contest/static/js/runtime-main.d2c7e5a7.js",
+    "runtime-main.js.map": "/ton-dex-contest/static/js/runtime-main.d2c7e5a7.js.map",
+    "static/js/2.8377778e.chunk.js": "/ton-dex-contest/static/js/2.8377778e.chunk.js",
+    "static/js/2.8377778e.chunk.js.map": "/ton-dex-contest/static/js/2.8377778e.chunk.js.map",
+    "index.html": "/ton-dex-contest/index.html",
+    "static/css/main.cff6ea26.chunk.css.map": "/ton-dex-contest/static/css/main.cff6ea26.chunk.css.map",
+    "static/js/2.8377778e.chunk.js.LICENSE.txt": "/ton-dex-contest/static/js/2.8377778e.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/ton-dex-contest/static/media/Mulish-Regular.18a0df44.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d2c7e5a7.js",
+    "static/js/2.8377778e.chunk.js",
+    "static/css/main.cff6ea26.chunk.css",
+    "static/js/main.d8269ec7.chunk.js"
+  ]
+}
