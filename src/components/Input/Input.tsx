@@ -1,38 +1,18 @@
-// import { forwardRef, InputHTMLAttributes, useEffect, useRef } from 'react';
-
-// import useCombinedRefs from 'hooks/useCombineRefs';
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  autofocus?: boolean;
-}
-
-// const Input = forwardRef<HTMLInputElement, InputProps>(
-//   ({ autofocus, ...props }, ref) => {
-//     const inputRef = useRef<HTMLInputElement>(null);
-//     const targetRef = useCombinedRefs<HTMLInputElement>(inputRef, ref);
-
-//     useEffect(() => {
-//       if (autofocus) {
-//         inputRef.current?.focus();
-//       }
-//     }, []);
-//     return <input {...props} className={styles.input} ref={targetRef} />;
-//   },
-// );
-
-// export default Input;
-
 import { InputHTMLAttributes, memo } from 'react';
 
+import classnames from 'libs/classnames';
+
 import styles from './input.module.css';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   autofocus?: boolean;
 }
 
-export const NumericalInputBase = ({
+export const Input = ({
   value,
   onChange,
   placeholder,
+  className,
   ...rest
 }: InputProps) => {
   return (
@@ -47,9 +27,9 @@ export const NumericalInputBase = ({
       minLength={1}
       maxLength={79}
       spellCheck="false"
-      className={styles.input}
+      className={classnames(styles.input, className)}
     />
   );
 };
 
-export default memo(NumericalInputBase);
+export default memo(Input);

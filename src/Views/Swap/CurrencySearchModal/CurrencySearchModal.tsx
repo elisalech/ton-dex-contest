@@ -3,13 +3,15 @@ import { FixedSizeList } from 'react-window';
 
 import { Modal } from 'widgets/Modal';
 
+import { useSwapActions } from 'hooks/useSwapActions';
+import useDebounce from 'hooks/useDebounce';
+import useFilteredTokens from 'hooks/useFilteredTokens';
+
 import Input from 'components/Input/Input';
 
 import styles from './search_modal.module.css';
 import CurrencyList from './CurrencyList';
-import { TOKENS_DATA } from 'mocks/tokens';
 import FavouriteList from './FavouriteList';
-import { useSwapActions } from 'hooks/useSwapActions';
 
 interface CurrencySearchModalProps {
   onDismiss?: () => void;
@@ -17,6 +19,8 @@ interface CurrencySearchModalProps {
 
 export default function CurrencySearchModal(props: CurrencySearchModalProps) {
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const debouncedQuery = useDebounce(searchQuery);
+  const data = useFilteredTokens(debouncedQuery);
   const { selectFieldCurrency } = useSwapActions();
 
   const fixedList = useRef<FixedSizeList>(null);
@@ -36,7 +40,7 @@ export default function CurrencySearchModal(props: CurrencySearchModalProps) {
           fixedListRef={fixedList}
           onCurrencySelect={selectFieldCurrency}
           height={450}
-          currencies={TOKENS_DATA}
+          currencies={data}
         />
       </div>
     </Modal>

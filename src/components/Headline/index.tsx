@@ -11,7 +11,7 @@ interface HeadlineProps {
 const Headline: FC<HeadlineProps> = props => {
   const classes = classnames(styles.headline, styles.h1, props.className);
 
-  return <h1 {...props} className={classes} />;
+  return <h2 {...props} className={classes} />;
 };
 
 export default Headline;
