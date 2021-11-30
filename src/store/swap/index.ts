@@ -39,6 +39,7 @@ const swapReducer: Reducer<SwapState> = (state = initialState, action) => {
           state.independentField === Field.FROM ? Field.TO : Field.FROM,
         [Field.FROM]: state[Field.TO],
         [Field.TO]: state[Field.FROM],
+        typedValue: '',
       };
     default:
       return state;

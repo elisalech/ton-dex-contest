@@ -38,8 +38,8 @@ export const Button: FC<ButtonProps> = ({
     styles.common,
     styles[variant],
     variant !== 'text' && styles[size],
-    disabled && styles.disabled,
     color && styles[color],
+    disabled && styles.disabled,
     className,
   );
 

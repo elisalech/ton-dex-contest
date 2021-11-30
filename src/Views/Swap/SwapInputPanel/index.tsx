@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 
 import { Field } from 'store/swap/types';
 
-import { useFieldToken } from 'hooks/useSwapState';
+import { useFieldToken, useSwapState } from 'hooks/useSwapState';
 import { useSwapActions } from 'hooks/useSwapActions';
 import { useTokenBalance } from 'hooks/useTokenBalances';
 
@@ -30,6 +30,7 @@ export default function SwapInputPanel({
   const { handleClickSelectButton, handleTypeAction } = useSwapActions();
   const token = useFieldToken(field);
   const balance = useTokenBalance(token);
+  const { toValue } = useSwapState();
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +46,7 @@ export default function SwapInputPanel({
 
   const handleClickMax = useCallback(() => {
     setNumValue(balance!.amount);
+    handleTypeAction(field, balance!.amount);
   }, [balance, handleChange]);
 
   return (
@@ -64,8 +66,8 @@ export default function SwapInputPanel({
       <Row fullWidth>
         <Input
           placeholder="0.0"
-          disabled={disabled}
-          value={numValue}
+          disabled={!balance?.amount || disabled}
+          value={field === Field.TO ? toValue : numValue}
           onChange={handleChange}
         />
 

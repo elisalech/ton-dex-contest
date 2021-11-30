@@ -11,10 +11,12 @@ import styles from './styles.module.css';
 import { useUserState } from 'hooks/useUserState';
 import IRefresh from 'components/Icons/IRefresh';
 import { useSwapActions } from 'hooks/useSwapActions';
+import { useSwapState } from 'hooks/useSwapState';
 
 export default function SwapView() {
   const { handleConnect, address } = useUserState();
-  const { handleSwitchFields } = useSwapActions();
+  const { handleSwitchFields, handleSwap } = useSwapActions();
+  const { canSwap } = useSwapState();
 
   return (
     <main className={styles.container}>
@@ -33,9 +35,10 @@ export default function SwapView() {
         <div className={styles.footer}>
           {address ? (
             <Button
-              onClick={handleConnect}
-              startIcon={<IWallet width={22} height={22} />}>
-              Buy
+              disabled={!canSwap}
+              onClick={handleSwap}
+              startIcon={canSwap && <IWallet width={22} height={22} />}>
+              {canSwap ? 'Buy' : 'Enter valid amount'}
             </Button>
           ) : (
             <Button onClick={handleConnect}>Connect wallet</Button>

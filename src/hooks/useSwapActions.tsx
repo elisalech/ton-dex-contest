@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 
 import { Currency } from 'types';
 
+import SwapService from 'services/SwapService';
+
 import {
   selectCurrency,
   selectField,
@@ -47,10 +49,15 @@ export const useSwapActions = () => {
     [openModal],
   );
 
+  const handleSwap = useCallback(() => {
+    SwapService.createTransaction();
+  }, []);
+
   return {
     handleClickSelectButton,
     selectFieldCurrency,
     handleSwitchFields,
     handleTypeAction,
+    handleSwap,
   };
 };

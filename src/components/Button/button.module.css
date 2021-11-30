@@ -63,5 +63,6 @@
 }
 
 .disabled {
-  color: #ccc;
+  background-color: rgb(214, 214, 214) !important;
+  cursor: not-allowed;
 }
