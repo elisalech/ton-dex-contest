@@ -84,7 +84,7 @@ export default function CurrencyList({
           onClick={() => (isSelected ? null : handleSelect(currency))}
           className={classes}>
           <Row className={styles['row-left']}>
-            <CurrencyLogo currency={currency} />
+            <CurrencyLogo withMarginRight currency={currency} />
             <Column className={styles['row-left-name']}>
               <Text color="secondary" weight="bold">
                 {currency.name}

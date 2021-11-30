@@ -1,65 +1,21 @@
 import React, { useMemo } from 'react';
 
+import { useSortTable } from 'hooks/useSortTable';
+
+import { PoolData } from 'types';
+
+import Text from 'components/Text';
 import { Button } from 'components/Button/Button';
-import { CurrencyLogo } from 'components/CurrencyLogo/CurrencyLogo';
 import IArrowLeft from 'components/Icons/IArrowLeft';
 import IArrowRight from 'components/Icons/IArrowRight';
 import { Column, Row } from 'components/Layout';
-import Text from 'components/Text';
-import { useSortTable } from 'hooks/useSortTable';
+import ILoading from 'components/Icons/ILoading';
 
-// import { Link } from 'react-router-dom';
-// import { formatAmount } from 'views/Info/utils/formatInfoNumbers'
-// import { Button, TableWrapper, PageButtons, Arrow, Break } from './shared'
-import { PoolData } from 'types';
+import PoolsTableRow from './PoolsTableRow';
 
 import styles from './pool_table.module.css';
-import truncateHash from 'utils/truncateHash';
-import IExternal from 'components/Icons/IExternal';
-import formatUsdAmount from 'utils/formatUsdAmount';
 
-const LoadingRow: React.FC = () => (
-  <div className={styles.grid}>
-    {/* <Skeleton />
-    <Skeleton />
-    <Skeleton />
-    <Skeleton />
-    <Skeleton />
-    <Skeleton />
-    <Skeleton /> */}
-  </div>
-);
-
-const TableLoader: React.FC = () => (
-  <>
-    <LoadingRow />
-    <LoadingRow />
-    <LoadingRow />
-  </>
-);
-
-const DataRow = ({ poolData }: { poolData: PoolData }) => {
-  return (
-    <div className={styles.grid}>
-      <a href={`https://ton.sh/address/${poolData.pair}`} target="_blank">
-        <Row>
-          <IExternal width="24" height="24" />
-          <Text>{truncateHash(poolData.pair)}</Text>
-        </Row>
-      </a>
-      <Row justifyContent="start">
-        <CurrencyLogo address={poolData.token0.address} />
-        <CurrencyLogo address={poolData.token1.address} />
-        <Text>
-          {poolData.token0.symbol}/{poolData.token1.symbol}
-        </Text>
-      </Row>
-      <Text>{formatUsdAmount(poolData.reserveUSD)}</Text>
-      <Text>{formatUsdAmount(poolData.volumeUSD24h)}</Text>
-      <Text>{poolData.apy}</Text>
-    </div>
-  );
-};
+const ITEMS_PER_PAGE_OPTIONS = [10, 20, 30, 40, 50, 0];
 
 enum SortFields {
   apy = 'apy',
@@ -123,17 +79,30 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
         ))}
         <div />
       </div>
-      {/* <Break /> */}
-      {sortedData.length > 0 ? (
+      {loading ? (
+        <Text color="blue" size="big">
+          <ILoading />
+        </Text>
+      ) : sortedData.length > 0 ? (
         <>
-          {sortedData.map(poolData => {
-            if (poolData) {
-              return <DataRow key={poolData.pair} poolData={poolData} />;
-            }
-            return null;
-          })}
-          {loading && <LoadingRow />}
-          <Row>
+          {sortedData.map(poolData =>
+            poolData ? (
+              <PoolsTableRow key={poolData.pair} poolData={poolData} />
+            ) : null,
+          )}
+          <Row justifyContent="flex-end" className={styles.controls}>
+            <select
+              className={styles.select}
+              value={itemsPerPage}
+              onChange={e => {
+                setItemsPerPage(Number(e.target.value));
+              }}>
+              {ITEMS_PER_PAGE_OPTIONS.map(pageSize => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize === 0 ? 'All' : pageSize}
+                </option>
+              ))}
+            </select>
             <Button
               variant="text"
               disabled={page === 1}
@@ -155,23 +124,12 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
               }}>
               <IArrowRight />
             </Button>
-            <select
-              value={itemsPerPage}
-              onChange={e => {
-                setItemsPerPage(Number(e.target.value));
-              }}>
-              {[10, 20, 30, 40, 50, 0].map(pageSize => (
-                <option key={pageSize} value={pageSize}>
-                  {pageSize === 0 ? 'All' : pageSize}
-                </option>
-              ))}
-            </select>
           </Row>
         </>
       ) : (
-        <>
-          <TableLoader />
-        </>
+        <Text size="big" color="gray">
+          Pools now found
+        </Text>
       )}
     </Column>
   );

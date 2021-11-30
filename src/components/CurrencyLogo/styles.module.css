@@ -6,3 +6,7 @@
 .margin_right {
   margin-right: 8px;
 }
+
+.second {
+  transform: translateX(-6px);
+}

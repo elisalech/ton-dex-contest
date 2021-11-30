@@ -16,7 +16,7 @@ export default function FavouriteList() {
         <div
           key={item?.address}
           onClick={() => dispatch(removeWatchlistToken(item!))}>
-          <CurrencyLogo currency={item} />
+          <CurrencyLogo withMarginRight currency={item} />
           <Text>{item?.symbol}</Text>
         </div>
       ))}
