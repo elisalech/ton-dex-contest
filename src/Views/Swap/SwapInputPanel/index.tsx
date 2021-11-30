@@ -57,9 +57,11 @@ export default function SwapInputPanel({
           <Row>
             <Text size="small">Balance: </Text>
             <Text size="small">{`    ${balance.amount}`}</Text>
-            <Button onClick={handleClickMax} color="blue" variant="text">
-              MAX
-            </Button>
+            {field !== Field.TO && (
+              <Button onClick={handleClickMax} color="blue" variant="text">
+                MAX
+              </Button>
+            )}
           </Row>
         )}
       </Row>
