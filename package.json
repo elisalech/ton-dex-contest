@@ -1,6 +1,6 @@
 {
   "name": "ton-dex-contest",
-  "homepage": "https://elisalech.github.io/ton-dex-contest/",
+  "homepage": "https://elisalech.github.io/ton-dex-contest",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
