@@ -11,3 +11,10 @@ project build with yarn
 ## Start locally
 
 ### `yarn start`
+
+## TODO
+
+- [ ] add responsive layout
+- [ ] fix create-liquidity logic
+- [ ] add pages lazy loading
+- [ ] add dark theme
