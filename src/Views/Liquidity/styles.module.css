@@ -1,8 +1,9 @@
 .container {
   margin-top: 50px;
+  margin: 0 auto;
 }
 
-.swapCard {
+.card {
   margin: 0 auto;
 }
 

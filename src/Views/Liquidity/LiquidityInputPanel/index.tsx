@@ -7,7 +7,6 @@ import { useSwapActions } from 'hooks/useSwapActions';
 import { useTokenBalance } from 'hooks/useTokenBalances';
 
 import { Column, Row } from 'components/Layout';
-import { Button } from 'components/Button/Button';
 import Text from 'components/Text';
 import Input from 'components/Input/Input';
 
@@ -38,10 +37,6 @@ export default function LiquidityInputPanel({ field }: SwapInputPanelProps) {
     [setNumValue],
   );
 
-  const handleClickMax = useCallback(() => {
-    setNumValue(balance!.amount);
-  }, [balance, handleChange]);
-
   return (
     <Column>
       <Row fullWidth>
@@ -50,14 +45,11 @@ export default function LiquidityInputPanel({ field }: SwapInputPanelProps) {
           <Row>
             <Text size="small">Balance: </Text>
             <Text size="small">{`    ${balance.amount}`}</Text>
-            <Button onClick={handleClickMax} color="blue" variant="text">
-              MAX
-            </Button>
           </Row>
         )}
       </Row>
       <Row fullWidth>
-        <Input value={numValue} onChange={handleChange} />
+        <Input disabled value={numValue} onChange={handleChange} />
 
         <SelectCurrencyButton
           onClick={() => handleClickSelectButton(field)}

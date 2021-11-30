@@ -8,21 +8,26 @@ import IAdd from 'components/Icons/IAdd';
 
 import LiquidityInputPanel from './LiquidityInputPanel';
 
-import styles from './styles.module.css';
 import { useUserState } from 'hooks/useUserState';
-
+import { useCreateLiquidityMode } from 'hooks/useCreateLiquidityMode';
 import { useFetchPools } from 'hooks/useFetchPools';
 import { Input } from 'components/Input/Input';
 import { Separator } from 'components/Separator/Separator';
 
+import styles from './styles.module.css';
+import StatsCard from 'components/StatsCard';
+import { useLiquidityInfo } from 'hooks/useLiquidityInfo';
+
 export default function LiquidityView() {
   useFetchPools();
   const { handleConnect, address } = useUserState();
+  const { isProvideMode } = useCreateLiquidityMode();
+  const statsData = useLiquidityInfo();
 
   return (
     <main className={styles.container}>
-      <Card className={styles.swapCard}>
-        <Headline>Create Liquidity</Headline>
+      <Card className={styles.card}>
+        <Headline>{isProvideMode ? 'Provide' : 'Create'} Liquidity</Headline>
         <div className={styles.inputs_wrap}>
           <LiquidityInputPanel field={Field.FROM} />
           <Button className={styles.addIcon} variant="text">
@@ -31,7 +36,7 @@ export default function LiquidityView() {
           <LiquidityInputPanel field={Field.TO} />
         </div>
         <Separator />
-        <Input placeholder="0.0$" label="Or type USD amount" />
+        <Input placeholder="0.0$" label="Type USD amount" />
         <div className={styles.footer}>
           {address ? (
             <Button
@@ -44,6 +49,7 @@ export default function LiquidityView() {
           )}
         </div>
       </Card>
+      {statsData && <StatsCard className={styles.card} statsData={statsData} />}
     </main>
   );
 }

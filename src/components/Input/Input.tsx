@@ -8,6 +8,7 @@ import Text from 'components/Text';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   autofocus?: boolean;
   label?: string;
+  disabled?: boolean;
 }
 
 export const Input = ({
@@ -15,6 +16,7 @@ export const Input = ({
   onChange,
   label,
   placeholder,
+  disabled,
   className,
   ...rest
 }: InputProps) => {
@@ -28,6 +30,7 @@ export const Input = ({
       <input
         {...rest}
         value={value}
+        disabled={disabled}
         onChange={onChange}
         autoComplete="off"
         autoCorrect="off"
@@ -36,7 +39,11 @@ export const Input = ({
         minLength={1}
         maxLength={79}
         spellCheck="false"
-        className={classnames(styles.input, className)}
+        className={classnames(
+          styles.input,
+          disabled && styles.disabled,
+          className,
+        )}
       />
     </>
   );

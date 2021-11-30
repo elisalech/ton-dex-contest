@@ -36,3 +36,7 @@
 .input::placeholder {
   color: #333;
 }
+
+.disabled {
+  cursor: not-allowed !important;
+}

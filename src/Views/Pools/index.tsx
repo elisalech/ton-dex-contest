@@ -20,10 +20,8 @@ export default function PoolsView() {
 
   return (
     <main className={style.container}>
-      <Row>
-        <Headline size="big" className={style.title}>
-          Liquidity Pools
-        </Headline>
+      <Row className={style.title_wrap}>
+        <Headline size="big">Liquidity Pools</Headline>
         <Link to={AppRoutes.CREATE_LIQUIDITY}>
           <Button variant="outline">Create liquidity</Button>
         </Link>

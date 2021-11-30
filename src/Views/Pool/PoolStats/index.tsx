@@ -1,17 +1,18 @@
+import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 
 import { PoolData } from 'types';
+import { AppRoutes } from 'Pages/types';
 
 import { Row } from 'components/Layout';
 import { DoubleCurrencyLogo } from 'components/CurrencyLogo/CurrencyLogo';
 import Headline from 'components/Headline';
 import IStar from 'components/Icons/IStar';
-import { Card } from 'components/Card/Card';
-
-import PoolStatsRow from './PoolStatsRow';
 
 import styles from './pool_stats.module.css';
 import Text from 'components/Text';
+import { Button } from 'components/Button/Button';
+import StatsCard from 'components/StatsCard';
 
 interface PoolStatsProps {
   data: PoolData;
@@ -40,7 +41,7 @@ export default function PoolStats({ data }: PoolStatsProps) {
 
   return (
     <section>
-      <Row>
+      <Row className={styles.header_section}>
         <Row>
           <DoubleCurrencyLogo
             className={styles.logo_img}
@@ -51,15 +52,18 @@ export default function PoolStats({ data }: PoolStatsProps) {
         </Row>
         <IStar width="34" height="34" />
       </Row>
-      <Card className={styles.stats_card}>
-        {statsData.map(rowData => (
-          <PoolStatsRow key={rowData.label} {...rowData} />
-        ))}
-      </Card>
-      <Headline>Transactions history:</Headline>
-      <Text color="gray" weight="extraBold">
-        No transactions yet...
-      </Text>
+      <Row>
+        <StatsCard statsData={statsData} />
+        <Link to={`${AppRoutes.CREATE_LIQUIDITY}?provide=true`}>
+          <Button variant="outline">Provide Liquidity</Button>
+        </Link>
+      </Row>
+      <section className={styles.history_section}>
+        <Headline>Transactions history:</Headline>
+        <Text color="gray" weight="extraBold">
+          No transactions yet...
+        </Text>
+      </section>
     </section>
   );
 }
