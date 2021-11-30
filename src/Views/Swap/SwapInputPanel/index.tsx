@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 import { Field } from 'store/swap/types';
 
@@ -9,11 +9,13 @@ import { useTokenBalance } from 'hooks/useTokenBalances';
 import { Column, Row } from 'components/Layout';
 import { Button } from 'components/Button/Button';
 import Text from 'components/Text';
+import Input from 'components/Input/Input';
 
-import NumericalInput from './NumericalInput';
 import { SelectCurrencyButton } from './SelectCurrencyButton';
 
 import styles from './styles.module.css';
+
+const inputRegex = RegExp('^[0-9]*.?[0-9]*$');
 
 interface SwapInputPanelProps {
   field: Field;
@@ -24,22 +26,38 @@ export default function SwapInputPanel({ field }: SwapInputPanelProps) {
   const { handleClickSelectButton } = useSwapActions();
   const token = useFieldToken(field);
   const balance = useTokenBalance(token);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const nextValue = event.target.value.replace(/,/g, '.');
+
+      if (nextValue === '' || inputRegex.test(nextValue)) {
+        setNumValue(nextValue);
+      }
+    },
+    [setNumValue],
+  );
+
+  const handleClickMax = useCallback(() => {
+    setNumValue(balance!.amount);
+  }, [balance, handleChange]);
+
   return (
     <Column>
       <Row fullWidth>
         <Text className={styles.source}>{field}:</Text>
-        {balance && (
+        {balance?.amount && (
           <Row>
             <Text size="small">Balance: </Text>
             <Text size="small">{`    ${balance.amount}`}</Text>
-            <Button color="blue" variant="text">
+            <Button onClick={handleClickMax} color="blue" variant="text">
               MAX
             </Button>
           </Row>
         )}
       </Row>
       <Row fullWidth>
-        <NumericalInput value={numValue} onChange={setNumValue} />
+        <Input value={numValue} onChange={handleChange} />
 
         <SelectCurrencyButton
           onClick={() => handleClickSelectButton(field)}

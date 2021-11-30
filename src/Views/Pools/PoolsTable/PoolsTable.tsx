@@ -48,17 +48,17 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
   const headerFieldsData = useMemo(
     () => [
       {
-        lable: 'Liquidity',
+        label: 'Liquidity',
         handler: () => handleSort(SortFields.reserveUSD),
         arrow: getArrow(SortFields.reserveUSD),
       },
       {
-        lable: 'Volume 24h',
+        label: 'Volume 24h',
         handler: () => handleSort(SortFields.volumeUSD24h),
         arrow: getArrow(SortFields.volumeUSD24h),
       },
       {
-        lable: 'APY',
+        label: 'APY',
         handler: () => handleSort(SortFields.apy),
         arrow: getArrow(SortFields.apy),
       },
@@ -68,17 +68,19 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
 
   return (
     <Column>
-      <div className={styles.grid}>
-        <Text weight="bold">Pool</Text>
-        <div />
-        {headerFieldsData.map(item => (
-          <Button
-            variant="text"
-            key={item.lable}
-            onClick={item.handler}>{`${item.lable} ${item.arrow}`}</Button>
-        ))}
-        <div />
-      </div>
+      {sortedData.length > 0 && (
+        <div className={styles.grid}>
+          <Text weight="bold">Pool</Text>
+          <div />
+          {headerFieldsData.map(item => (
+            <Button
+              variant="text"
+              key={item.label}
+              onClick={item.handler}>{`${item.label} ${item.arrow}`}</Button>
+          ))}
+          <div />
+        </div>
+      )}
       {loading ? (
         <Text color="blue" size="big">
           <ILoading />
@@ -128,7 +130,7 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
         </>
       ) : (
         <Text size="big" color="gray">
-          Pools now found
+          Pools not found
         </Text>
       )}
     </Column>

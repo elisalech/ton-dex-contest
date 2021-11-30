@@ -15,4 +15,4 @@ export const MOCK_BALANCES = [
 export const generateAmount = () =>
   Math.random() >= 0.5
     ? (Math.random() * 100).toFixed(Math.floor(Math.random() * 8))
-    : '0.00';
+    : '';

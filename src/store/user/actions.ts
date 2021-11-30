@@ -8,6 +8,8 @@ export enum UserActionTypes {
   addWatchlistToken = 'USER/ADD_WATCHLIST_TOKEN',
   removeWatchlistToken = 'USER/REMOVE_WATCHLIST_TOKEN',
   resetUserState = 'USER/RESET_USER_STATE',
+  addWatchlistPool = 'USER/ADD_WATCHLIST_POOL',
+  removeWatchlistPool = 'USER/REMOVE_WATCHLIST_POOL',
 }
 
 export const setTheme = (payload: ThemeTypes) => ({
@@ -35,5 +37,15 @@ export const addWatchlistToken = (payload: Currency) => ({
 
 export const removeWatchlistToken = (payload: Currency) => ({
   type: UserActionTypes.removeWatchlistToken,
+  payload,
+});
+
+export const addWatchlistPool = (payload: Address) => ({
+  type: UserActionTypes.addWatchlistPool,
+  payload,
+});
+
+export const removeWatchlistPool = (payload: Address) => ({
+  type: UserActionTypes.removeWatchlistPool,
   payload,
 });

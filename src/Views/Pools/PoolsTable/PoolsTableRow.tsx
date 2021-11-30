@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { PoolData } from 'types';
 
 import truncateHash from 'utils/truncateHash';
@@ -10,16 +12,17 @@ import { DoubleCurrencyLogo } from 'components/CurrencyLogo/CurrencyLogo';
 
 import styles from './pool_table.module.css';
 import classnames from 'libs/classnames';
+import { AppRoutes } from 'Pages/types';
 
 export default function PoolsTableRow({ poolData }: { poolData: PoolData }) {
   return (
-    <div className={classnames(styles.grid, styles.row)}>
-      <a href={`https://ton.sh/address/${poolData.pair}`} target="_blank">
-        <Row>
-          <IExternal width="16" height="16" />
-          <Text color="blue">{truncateHash(poolData.pair)}</Text>
-        </Row>
-      </a>
+    <Link
+      to={`${AppRoutes.POOL}/${poolData.pair}`}
+      className={classnames(styles.grid, styles.row)}>
+      <Row>
+        <IExternal width="16" height="16" />
+        <Text color="blue">{truncateHash(poolData.pair)}</Text>
+      </Row>
       <Row justifyContent="start">
         <DoubleCurrencyLogo
           address0={poolData.token0.address}
@@ -39,6 +42,6 @@ export default function PoolsTableRow({ poolData }: { poolData: PoolData }) {
       <Text color="gray" size="medium">
         {poolData.apy}%
       </Text>
-    </div>
+    </Link>
   );
 }

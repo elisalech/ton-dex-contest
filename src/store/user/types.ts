@@ -7,6 +7,7 @@ export enum ThemeTypes {
 
 export interface UserState {
   watchlistTokens: CurrencyMap;
+  watchlistPools: Address[];
   isDark: boolean;
   address: Address | null;
 }

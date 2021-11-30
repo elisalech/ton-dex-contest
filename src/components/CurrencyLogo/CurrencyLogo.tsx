@@ -50,6 +50,7 @@ interface DoubleCurrencyLogoProps {
   currency1?: Currency;
   address1?: Address;
   withMarginRight?: boolean;
+  className?: string;
 }
 
 export const DoubleCurrencyLogo = ({
@@ -58,15 +59,20 @@ export const DoubleCurrencyLogo = ({
   currency1,
   address0,
   address1,
+  className,
 }: DoubleCurrencyLogoProps) => {
   return (
     <Row>
-      <CurrencyLogo currency={currency0} address={address0} />
+      <CurrencyLogo
+        className={className}
+        currency={currency0}
+        address={address0}
+      />
       <CurrencyLogo
         currency={currency1}
         address={address1}
         withMarginRight={withMarginRight}
-        className={styles.second}
+        className={classnames(styles.second, className)}
       />
     </Row>
   );

@@ -19,7 +19,7 @@ const poolReducer: Reducer<PoolsState> = (state = initialState, action) => {
         poolsData: action.payload as PoolData[],
       };
     case PoolsActionTypes.setPoolsByAddress:
-      const poolsByAddress = (action.patload as PoolData[]).reduce<PoolsMap>(
+      const poolsByAddress = (action.payload as PoolData[])?.reduce<PoolsMap>(
         (memo, pool) => {
           memo[pool.pair] = pool;
 

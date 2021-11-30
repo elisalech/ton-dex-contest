@@ -30,7 +30,7 @@ export default function CurrencySearchModal(props: CurrencySearchModalProps) {
     <Modal onDismiss={props.onDismiss} title="Select a Token">
       <div className={styles.container}>
         <Input value={searchQuery} onChange={handleChange} autoFocus />
-        <FavouriteList />
+        <FavouriteList selectFieldCurrency={selectFieldCurrency} />
         <CurrencyList
           // @ts-ignore
           fixedListRef={fixedList}

@@ -39,9 +39,8 @@ export const fetchPoolsData: ActionCreator<
         throw new Error('pools data is empty');
       }
 
-      dispatch(setPools(data));
-
       dispatch(setPoolsByAddress(data));
+      dispatch(setPools(data));
 
       dispatch(setPoolsStatus(PoolsStatuses.fulfilled));
     } catch (e) {

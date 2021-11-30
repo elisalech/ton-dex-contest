@@ -6,6 +6,7 @@ import { ThemeTypes, UserState } from './types';
 
 const initialState: UserState = {
   isDark: false,
+  watchlistPools: [],
   watchlistTokens: {},
   address: null,
 };
@@ -48,6 +49,20 @@ const userReducer: Reducer<UserState> = (state = initialState, action) => {
       return {
         ...state,
         watchlistTokens: nextWatchlistTokens,
+      };
+
+    case UserActionTypes.addWatchlistPool:
+      return {
+        ...state,
+        watchlistPools: [...state.watchlistPools, action.payload],
+      };
+
+    case UserActionTypes.removeWatchlistPool:
+      return {
+        ...state,
+        watchlistPools: state.watchlistPools.filter(
+          item => item !== action.payload,
+        ),
       };
 
     case UserActionTypes.resetUserState:
