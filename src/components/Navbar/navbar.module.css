@@ -8,15 +8,22 @@
   background-color: #fff;
 }
 
+.home {
+  margin-right: 18px;
+}
+
 .nav-wrap {
   margin-left: 40px;
   display: flex;
 }
 
 .nav-link {
-  color: var(--color-primary);
+  padding: 6px 12px;
 }
 
-:global(.active) .nav-link {
+:global(.active) .nav-text {
   color: var(--text-color-primary);
+}
+
+.accountButton {
 }

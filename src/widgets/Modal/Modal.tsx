@@ -27,7 +27,7 @@ const Modal: React.FC<Props> = ({
   className,
   showCloseButton = true,
 }) => (
-  <Card className={classnames(styles.base, className)}>
+  <Card withPadding={false} className={classnames(styles.base, className)}>
     <Row className={styles.header}>
       <div>
         {onBack && (

@@ -10,3 +10,11 @@
   width: fit-content;
   margin: 10px auto;
 }
+
+.inputs_wrap {
+  margin: 24px 00px;
+}
+
+.refresh {
+  margin: 8px auto -4px;
+}

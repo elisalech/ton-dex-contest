@@ -18,18 +18,20 @@ const navlinks = [
 export default function Navbar() {
   return (
     <Row as="header" className={styles.container}>
-      <NavLink to={AppRoutes.HOME}>
-        <TonLogo />
-      </NavLink>
-      <nav className={styles['nav-wrap']}>
-        {navlinks.map(item => (
-          <NavLink key={item.to} to={item.to}>
-            <Text weight="bold" className={styles['nav-link']}>
-              {item.label}
-            </Text>
-          </NavLink>
-        ))}
-      </nav>
+      <Row>
+        <NavLink to={AppRoutes.HOME} className={styles.home}>
+          <TonLogo />
+        </NavLink>
+        <nav className={styles['nav-wrap']}>
+          {navlinks.map(item => (
+            <NavLink key={item.to} className={styles['nav-link']} to={item.to}>
+              <Text color="blue" weight="bold" className={styles['nav-text']}>
+                {item.label}
+              </Text>
+            </NavLink>
+          ))}
+        </nav>
+      </Row>
       <WalletButton />
     </Row>
   );

@@ -9,11 +9,13 @@ interface RowProps extends HTMLAttributes<HTMLDivElement> {
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
   as?: ElementType;
+  fullWidth?: boolean;
 }
 
 export const Row: FC<RowProps> = ({
   children,
   style = {},
+  fullWidth,
   justifyContent = 'space-between',
   alignItems = 'center',
   className,
@@ -21,7 +23,12 @@ export const Row: FC<RowProps> = ({
   ...props
 }) => (
   <Tag
-    style={{ ...style, justifyContent, alignItems }}
+    style={{
+      justifyContent,
+      alignItems,
+      width: fullWidth ? '100%' : undefined,
+      ...style,
+    }}
     className={classnames(styles.row, className)}
     {...props}>
     {children}

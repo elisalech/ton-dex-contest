@@ -1,25 +1,22 @@
+import React, { useMemo } from 'react';
+
 import { Button } from 'components/Button/Button';
 import { CurrencyLogo } from 'components/CurrencyLogo/CurrencyLogo';
 import IArrowLeft from 'components/Icons/IArrowLeft';
 import IArrowRight from 'components/Icons/IArrowRight';
 import { Column, Row } from 'components/Layout';
 import Text from 'components/Text';
-import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import { useSortTable } from 'hooks/useSortTable';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { formatAmount } from 'views/Info/utils/formatInfoNumbers'
 // import { Button, TableWrapper, PageButtons, Arrow, Break } from './shared'
 import { PoolData } from 'types';
 
 import styles from './pool_table.module.css';
-
-const SORT_FIELD = {
-  volumeUSD: 'volumeUSD',
-  tvlUSD: 'tvlUSD',
-  volumeUSDWeek: 'volumeUSDWeek',
-  lpFees24h: 'lpFees24h',
-  lpApr7d: 'lpApr7d',
-};
+import truncateHash from 'utils/truncateHash';
+import IExternal from 'components/Icons/IExternal';
+import formatUsdAmount from 'utils/formatUsdAmount';
 
 const LoadingRow: React.FC = () => (
   <div className={styles.grid}>
@@ -41,161 +38,123 @@ const TableLoader: React.FC = () => (
   </>
 );
 
-const DataRow = ({
-  poolData,
-  index,
-}: {
-  poolData: PoolData;
-  index: number;
-}) => {
+const DataRow = ({ poolData }: { poolData: PoolData }) => {
   return (
-    <Link to={`/info/pool/${poolData.pair}`}>
-      <div className={styles.grid}>
-        <Text>{index + 1}</Text>
+    <div className={styles.grid}>
+      <a href={`https://ton.sh/address/${poolData.pair}`} target="_blank">
         <Row>
-          <CurrencyLogo address={poolData.token0.address} />
-          <CurrencyLogo address={poolData.token1.address} />
-          <Text>
-            {poolData.token0.symbol}/{poolData.token1.symbol}
-          </Text>
+          <IExternal width="24" height="24" />
+          <Text>{truncateHash(poolData.pair)}</Text>
         </Row>
-        <Text>{poolData.volumeUSD}</Text>
-        <Text>{poolData.volumeUSD24h}</Text>
-        {/* <Text>{poolData.lpFees24h}</Text>
-        <Text>{poolData.lpApr7d}%</Text>
-        <Text>{poolData.liquidityUSD}</Text> */}
-        <Text>{poolData.lpExtraFeeInToken0}</Text>
-        <Text>{poolData.apy}%</Text>
-        <Text>{poolData.reserveUSD}</Text>
-      </div>
-    </Link>
+      </a>
+      <Row justifyContent="start">
+        <CurrencyLogo address={poolData.token0.address} />
+        <CurrencyLogo address={poolData.token1.address} />
+        <Text>
+          {poolData.token0.symbol}/{poolData.token1.symbol}
+        </Text>
+      </Row>
+      <Text>{formatUsdAmount(poolData.reserveUSD)}</Text>
+      <Text>{formatUsdAmount(poolData.volumeUSD24h)}</Text>
+      <Text>{poolData.apy}</Text>
+    </div>
   );
 };
 
+enum SortFields {
+  apy = 'apy',
+  reserveUSD = 'reserveUSD',
+  volumeUSD24h = 'volumeUSD24h',
+}
+
 interface PoolTableProps {
   poolDatas: PoolData[];
-  loading?: boolean; // If true shows indication that SOME pools are loading, but the ones already fetched will be shown
+  loading?: boolean;
 }
 
 const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
-  // for sorting
-  const [sortField, setSortField] = useState(SORT_FIELD.volumeUSD);
-  const [sortDirection, setSortDirection] = useState<boolean>(true);
+  const {
+    handleSort,
+    getArrow,
+    sortDirection,
+    sortField,
+    sortedData,
+    page,
+    itemsPerPage,
+    maxPage,
+    setItemsPerPage,
+    setPage,
+  } = useSortTable<PoolData, SortFields>({
+    data: poolDatas,
+    initialSortField: SortFields.reserveUSD,
+  });
 
-  // pagination
-  const [page, setPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  useEffect(() => {
-    let extraPages = 1;
-    if (poolDatas?.length % itemsPerPage === 0) {
-      extraPages = 0;
-    }
-    setMaxPage(Math.floor(poolDatas.length / itemsPerPage) + extraPages);
-  }, [poolDatas]);
-
-  const sortedPools = useMemo(() => {
-    return poolDatas
-      ? poolDatas
-          .sort((a, b) => {
-            if (a && b) {
-              return a[sortField as keyof PoolData] >
-                b[sortField as keyof PoolData]
-                ? (sortDirection ? -1 : 1) * 1
-                : (sortDirection ? -1 : 1) * -1;
-            }
-            return -1;
-          })
-          .slice(itemsPerPage * (page - 1), page * itemsPerPage)
-      : [];
-  }, [page, poolDatas, sortDirection, sortField]);
-
-  const handleSort = useCallback(
-    (newField: string) => {
-      setSortField(newField);
-      setSortDirection(sortField !== newField ? true : !sortDirection);
-    },
-    [sortDirection, sortField],
-  );
-
-  const arrow = useCallback(
-    (field: string) => {
-      const directionArrow = !sortDirection ? '↑' : '↓';
-      return sortField === field ? directionArrow : '';
-    },
+  const headerFieldsData = useMemo(
+    () => [
+      {
+        lable: 'Liquidity',
+        handler: () => handleSort(SortFields.reserveUSD),
+        arrow: getArrow(SortFields.reserveUSD),
+      },
+      {
+        lable: 'Volume 24h',
+        handler: () => handleSort(SortFields.volumeUSD24h),
+        arrow: getArrow(SortFields.volumeUSD24h),
+      },
+      {
+        lable: 'APY',
+        handler: () => handleSort(SortFields.apy),
+        arrow: getArrow(SortFields.apy),
+      },
+    ],
     [sortDirection, sortField],
   );
 
   return (
     <Column>
       <div className={styles.grid}>
-        <Text color="secondary">#</Text>
-        <Text color="secondary">Pool</Text>
-        <Button
-          color="secondary"
-          onClick={() => handleSort(SORT_FIELD.volumeUSD)}>
-          Volume 24H {arrow(SORT_FIELD.volumeUSD)}
-        </Button>
-        <Button
-          color="secondary"
-          onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}>
-          Volume 7D {arrow(SORT_FIELD.volumeUSDWeek)}
-        </Button>
-        <Button
-          color="secondary"
-          onClick={() => handleSort(SORT_FIELD.lpFees24h)}>
-          LP reward fees 24H {arrow(SORT_FIELD.lpFees24h)}
-        </Button>
-        <Button
-          color="secondary"
-          onClick={() => handleSort(SORT_FIELD.lpApr7d)}>
-          LP reward APR {arrow(SORT_FIELD.lpApr7d)}
-        </Button>
-        <Button color="secondary" onClick={() => handleSort(SORT_FIELD.tvlUSD)}>
-          Liquidity {arrow(SORT_FIELD.tvlUSD)}
-        </Button>
+        <Text weight="bold">Pool</Text>
+        <div />
+        {headerFieldsData.map(item => (
+          <Button
+            variant="text"
+            key={item.lable}
+            onClick={item.handler}>{`${item.lable} ${item.arrow}`}</Button>
+        ))}
+        <div />
       </div>
       {/* <Break /> */}
-      {sortedPools.length > 0 ? (
+      {sortedData.length > 0 ? (
         <>
-          {sortedPools.map((poolData, i) => {
+          {sortedData.map(poolData => {
             if (poolData) {
-              return (
-                <React.Fragment key={poolData.pair}>
-                  <DataRow
-                    index={(page - 1) * itemsPerPage + i}
-                    poolData={poolData}
-                  />
-                  {/* <Break /> */}
-                </React.Fragment>
-              );
+              return <DataRow key={poolData.pair} poolData={poolData} />;
             }
             return null;
           })}
           {loading && <LoadingRow />}
           <Row>
-            <div
+            <Button
+              variant="text"
+              disabled={page === 1}
               onClick={() => {
                 setPage(page === 1 ? page : page - 1);
               }}>
-              <IArrowLeft
-              // color={page === 1 ? 'textDisabled' : 'primary'}
-              />
-            </div>
+              <IArrowLeft />
+            </Button>
 
             <Text>
               Page {page} of {maxPage}
             </Text>
 
-            <div
+            <Button
+              variant="text"
+              disabled={page === maxPage}
               onClick={() => {
                 setPage(page === maxPage ? page : page + 1);
               }}>
-              <IArrowRight
-              // color={page === maxPage ? 'textDisabled' : 'primary'}
-              />
-            </div>
+              <IArrowRight />
+            </Button>
             <select
               value={itemsPerPage}
               onChange={e => {
@@ -212,8 +171,6 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
       ) : (
         <>
           <TableLoader />
-          {/* spacer */}
-          {/* <Box /> */}
         </>
       )}
     </Column>

@@ -12,6 +12,10 @@
   transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;
 }
 
+.text {
+  color: var(--text-color-primary);
+}
+
 .text:hover {
   opacity: 0.7;
 }
@@ -35,4 +39,12 @@
 
 .end-wrap {
   margin-left: 4px;
+}
+
+.blue {
+  color: var(--text-color-blue);
+}
+
+.disabled {
+  color: #ccc;
 }

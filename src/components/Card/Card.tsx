@@ -1,24 +1,27 @@
+import { FC } from 'react';
+
 import classnames from 'libs/classnames';
-import { FC, ReactNode } from 'react';
 
 import styles from './card.module.css';
 
 interface CardProps {
-  footerComponent?: ReactNode;
   className?: string;
+  withPadding?: boolean;
 }
 
 export const Card: FC<CardProps> = ({
   children,
   className,
-  footerComponent,
+  withPadding = true,
 }) => {
   return (
-    <div className={classnames(styles.container, className)}>
+    <div
+      className={classnames(
+        styles.container,
+        withPadding && styles.padding,
+        className,
+      )}>
       {children}
-      {footerComponent && (
-        <div className={styles.footer}>{footerComponent}</div>
-      )}
     </div>
   );
 };

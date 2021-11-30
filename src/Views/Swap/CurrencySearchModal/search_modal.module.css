@@ -1,13 +1,15 @@
 .container {
-  /* max-width: 420px;
-  width: 100%; */
-  /* padding: 10px; */
 }
 
 .row {
   padding: 10px;
 }
 
-.row:hover {
-  background-color: lightblue;
+.row:not(.row-selected):hover {
+  background-color: var(--color-hover);
+  cursor: pointer;
+}
+
+.row-selected {
+  opacity: 0.7;
 }

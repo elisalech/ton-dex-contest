@@ -18,29 +18,31 @@ export default function SwapView() {
   const { handleConnect, address } = useUserState();
   const { handleSwitchFields } = useSwapActions();
 
-  const renderFooter = () => (
-    <div className={styles.footer}>
-      {address ? (
-        <Button
-          onClick={handleConnect}
-          startIcon={<IWallet width={16} height={16} />}>
-          Buy
-        </Button>
-      ) : (
-        <Button onClick={handleConnect}>Connect wallet</Button>
-      )}
-    </div>
-  );
-
   return (
     <main className={styles.container}>
-      <Card footerComponent={renderFooter()} className={styles.swapCard}>
+      <Card className={styles.swapCard}>
         <Headline>Swap</Headline>
-        <SwapInputPanel field={Field.FROM} />
-        <Button variant="text" onClick={handleSwitchFields}>
-          <IRefresh />
-        </Button>
-        <SwapInputPanel field={Field.TO} />
+        <div className={styles.inputs_wrap}>
+          <SwapInputPanel field={Field.FROM} />
+          <Button
+            className={styles.refresh}
+            variant="text"
+            onClick={handleSwitchFields}>
+            <IRefresh />
+          </Button>
+          <SwapInputPanel field={Field.TO} />
+        </div>
+        <div className={styles.footer}>
+          {address ? (
+            <Button
+              onClick={handleConnect}
+              startIcon={<IWallet width={22} height={22} />}>
+              Buy
+            </Button>
+          ) : (
+            <Button onClick={handleConnect}>Connect wallet</Button>
+          )}
+        </div>
       </Card>
     </main>
   );

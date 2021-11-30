@@ -15,6 +15,7 @@ import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useFavoriteCurrencies } from 'hooks/useFavoriteCurrencies';
 import { addWatchlistToken, removeWatchlistToken } from 'store/user/actions';
 import { useTokenBalances } from 'hooks/useTokenBalances';
+import { useSwapState } from 'hooks/useSwapState';
 
 interface CurrencyListProps {
   selectedCurrency?: Currency | null;
@@ -32,6 +33,7 @@ export default function CurrencyList({
 }: CurrencyListProps) {
   const dispatch = useAppDispatch();
   const balances = useTokenBalances();
+  const { tokenFrom, tokenTo } = useSwapState();
   const { favoriteCurrenciesMap } = useFavoriteCurrencies();
 
   const itemKey = useCallback(
@@ -68,11 +70,12 @@ export default function CurrencyList({
       const balance = balances[currency.address];
 
       const isFavourite = !!favoriteCurrenciesMap[currency.address];
-      const isSelected = false;
+      const isSelected =
+        tokenFrom?.address === currency.address ||
+        tokenTo?.address === currency.address;
 
       const classes = classnames(styles.row, {
-        [`${styles['currency-row-disabled']}`]: true,
-        [`${styles['currency-row-selected']}`]: true,
+        [`${styles['row-selected']}`]: isSelected,
       });
 
       return (
@@ -95,7 +98,10 @@ export default function CurrencyList({
             <Text color="primary">{balance?.amount}</Text>
             <IStar
               selected={isFavourite}
-              onClick={() => toggleFavourite(currency, isFavourite)}
+              onClick={e => {
+                e.stopPropagation();
+                toggleFavourite(currency, isFavourite);
+              }}
             />
           </Row>
         </Row>

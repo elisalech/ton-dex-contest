@@ -7,11 +7,15 @@ import ILoading from 'components/Icons/ILoading';
 
 type ButtonVariants = 'primary' | 'text';
 
+type ButtonColor = 'blue' | 'default';
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   variant?: ButtonVariants;
   loading?: boolean;
+  color?: ButtonColor;
+  disabled?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -19,12 +23,20 @@ export const Button: FC<ButtonProps> = ({
   startIcon,
   endIcon,
   onClick,
+  color,
   className,
+  disabled,
   variant = 'primary',
   loading,
   ...props
 }) => {
-  const classes = classnames(styles.common, styles[variant], className);
+  const classes = classnames(
+    styles.common,
+    styles[variant],
+    disabled && styles.disabled,
+    color && styles[color],
+    className,
+  );
 
   return (
     <button

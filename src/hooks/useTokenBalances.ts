@@ -35,7 +35,7 @@ export const useTokenBalances = (): TokenAmountMap => {
   );
 };
 
-export function useTokenBalance(token: Currency): TokenAmount | undefined {
+export function useTokenBalance(token?: Currency): TokenAmount | undefined {
   const tokenBalances = useTokenBalances();
 
   return token ? tokenBalances[token.address] : undefined;

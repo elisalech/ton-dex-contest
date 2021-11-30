@@ -4,7 +4,6 @@
 
   max-width: 480px;
   width: 100%;
-  padding: 10px;
 
   background: var(--bg-color-primary);
   box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
@@ -14,6 +13,6 @@
   border: 1px solid var(--color-border);
 }
 
-.footer {
-  border-top: 1px solid var(--color-border);
+.padding {
+  padding: 10px;
 }

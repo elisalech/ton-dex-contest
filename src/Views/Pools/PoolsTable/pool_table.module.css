@@ -1,8 +1,18 @@
 .grid {
-  display: grid;
+  /* display: grid;
   grid-gap: 1em;
   align-items: center;
-  grid-template-columns: 20px 3.5fr repeat(5, 1fr);
+  grid-template-colum s: 20px 3.5fr repeat(5, 1fr); */
+
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 130px 200fr 60fr 60fr 170fr 100px;
+  grid-column-gap: 16px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  position: relative;
 
   padding: 0 24px;
   @media screen and (max-width: 900px) {
@@ -12,6 +22,7 @@
       display: none;
     }
   }
+
   @media screen and (max-width: 500px) {
     grid-template-columns: 20px 1.5fr repeat(1, 1fr);
     & :nth-child(4),

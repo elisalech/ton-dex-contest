@@ -31,12 +31,10 @@ export const NumericalInputBase = ({
       {...rest}
       value={value}
       onChange={handleChange}
-      // universal input options
       inputMode="decimal"
       title="Token Amount"
       autoComplete="off"
       autoCorrect="off"
-      // text-specific options
       type="text"
       pattern="^[0-9]*[.,]?[0-9]*$"
       placeholder={placeholder || '0.0'}
