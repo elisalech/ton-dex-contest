@@ -4,32 +4,34 @@ import { Button } from 'components/Button/Button';
 import { Card } from 'components/Card/Card';
 import Headline from 'components/Headline';
 import IWallet from 'components/Icons/IWallet';
+import IAdd from 'components/Icons/IAdd';
 
-import SwapInputPanel from './SwapInputPanel';
+import LiquidityInputPanel from './LiquidityInputPanel';
 
 import styles from './styles.module.css';
 import { useUserState } from 'hooks/useUserState';
-import IRefresh from 'components/Icons/IRefresh';
-import { useSwapActions } from 'hooks/useSwapActions';
 
-export default function SwapView() {
+import { useFetchPools } from 'hooks/useFetchPools';
+import { Input } from 'components/Input/Input';
+import { Separator } from 'components/Separator/Separator';
+
+export default function LiquidityView() {
+  useFetchPools();
   const { handleConnect, address } = useUserState();
-  const { handleSwitchFields } = useSwapActions();
 
   return (
     <main className={styles.container}>
       <Card className={styles.swapCard}>
-        <Headline>Swap</Headline>
+        <Headline>Create Liquidity</Headline>
         <div className={styles.inputs_wrap}>
-          <SwapInputPanel field={Field.FROM} />
-          <Button
-            className={styles.refresh}
-            variant="text"
-            onClick={handleSwitchFields}>
-            <IRefresh />
+          <LiquidityInputPanel field={Field.FROM} />
+          <Button className={styles.addIcon} variant="text">
+            <IAdd />
           </Button>
-          <SwapInputPanel field={Field.TO} />
+          <LiquidityInputPanel field={Field.TO} />
         </div>
+        <Separator />
+        <Input placeholder="0.0$" label="Or type USD amount" />
         <div className={styles.footer}>
           {address ? (
             <Button

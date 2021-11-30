@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useCallback, useState } from 'react';
 import Wallet from 'services/Wallet';
 
@@ -20,9 +21,12 @@ export const useUserState = () => {
     setLoading(false);
   }, []);
 
+  const tonBalance = useMemo(() => (address ? '10.8932' : ''), [address]);
+
   return {
     address,
     loading,
     handleConnect,
+    tonBalance,
   };
 };

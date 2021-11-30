@@ -3,4 +3,5 @@ export enum AppRoutes {
   SWAP = '/swap',
   POOLS = '/pools',
   POOL = '/pool',
+  CREATE_LIQUIDITY = '/create-liquidity',
 }

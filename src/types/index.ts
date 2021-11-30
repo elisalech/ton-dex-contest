@@ -13,7 +13,8 @@ type MapAddressToType<T> = { [address: Address]: T | undefined };
 export type CurrencyMap = MapAddressToType<Currency>;
 
 export interface TokenAmount {
-  currency: Currency;
+  currency?: Currency;
+  pool?: PoolData;
   amount: string;
 }
 

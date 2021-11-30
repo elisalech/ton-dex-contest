@@ -13,7 +13,8 @@ type TextColor =
   | 'black'
   | 'white'
   | 'blue'
-  | 'contrast';
+  | 'contrast'
+  | 'inherit';
 
 interface IText {
   inline?: boolean;

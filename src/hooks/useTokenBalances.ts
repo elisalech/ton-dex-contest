@@ -7,7 +7,7 @@ import { generateAmount } from 'mocks/balances';
 
 import useWalletAddress from './useWalletAdress';
 
-const MOCK_BALANCES_CASH: TokenAmountMap = {};
+const MOCK_BALANCES_CACHE: TokenAmountMap = {};
 
 export const useTokenBalances = (): TokenAmountMap => {
   const account = useWalletAddress();
@@ -19,15 +19,15 @@ export const useTokenBalances = (): TokenAmountMap => {
     () =>
       account && TOKENS_DATA.length > 0
         ? TOKENS_DATA.reduce<TokenAmountMap>((memo, currency) => {
-            // TODO: remove balances cash logic later
-            if (!MOCK_BALANCES_CASH[currency.address]) {
-              MOCK_BALANCES_CASH[currency.address] = {
+            // TODO: remove balances cache logic later
+            if (!MOCK_BALANCES_CACHE[currency.address]) {
+              MOCK_BALANCES_CACHE[currency.address] = {
                 amount: generateAmount(),
                 currency,
               };
             }
 
-            memo[currency.address] = MOCK_BALANCES_CASH[currency.address];
+            memo[currency.address] = MOCK_BALANCES_CACHE[currency.address];
             return memo;
           }, {})
         : {},

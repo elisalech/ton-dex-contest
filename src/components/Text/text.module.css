@@ -4,7 +4,7 @@
 }
 
 .small {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 16px;
 }
 
@@ -46,6 +46,10 @@
 
 .gray {
   color: var(--text-color-gray);
+}
+
+.inherit {
+  color: inherit;
 }
 
 .contrast {

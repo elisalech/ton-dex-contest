@@ -1,13 +1,16 @@
 .headline {
   font-family: 'Mulish-Black', sans-serif;
-  font-size: 32px;
-  line-height: 40px;
   font-weight: 500;
 
   color: var(--text-color-primary);
 }
 
-.h1 {
+.big {
   font-size: 45px;
   line-height: 56px;
+}
+
+.medium {
+  font-size: 30px;
+  line-height: 40px;
 }

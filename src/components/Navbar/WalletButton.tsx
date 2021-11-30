@@ -3,19 +3,21 @@ import { useUserState } from 'hooks/useUserState';
 import truncateHash from 'utils/truncateHash';
 
 import { Button } from 'components/Button/Button';
-
-import styles from './navbar.module.css';
-import { Row } from 'components/Layout';
 import Text from 'components/Text';
 
+import styles from './navbar.module.css';
+
 export default function WalletButton() {
-  const { address, handleConnect, loading } = useUserState();
+  const { address, handleConnect, loading, tonBalance } = useUserState();
 
   return address ? (
-    <Button variant="text" className={styles.accountButton}>
-      <Row>
-        <Text>10.8932 TON</Text> {truncateHash(address)}
-      </Row>
+    <Button size="small" variant="outline" className={styles.accountButton}>
+      <Text size="small" color="inherit" className={styles.balance}>
+        {tonBalance} Toncoin
+      </Text>{' '}
+      <Text color="inherit" className={styles.address}>
+        {truncateHash(address)}
+      </Text>
     </Button>
   ) : (
     <Button loading={loading} onClick={handleConnect}>

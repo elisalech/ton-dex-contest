@@ -1,5 +1,5 @@
 import SwapView from 'Views/Swap';
 
-export default function SwapPage() {
+export default function CreateLiquidityPage() {
   return <SwapView />;
 }
