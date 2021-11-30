@@ -6,6 +6,7 @@ import {
   selectCurrency,
   selectField,
   switchCurrencies,
+  typeInput,
 } from 'store/swap/actions';
 import { Field } from 'store/swap/types';
 
@@ -39,9 +40,17 @@ export const useSwapActions = () => {
     dispatch(switchCurrencies());
   }, [openModal]);
 
+  const handleTypeAction = useCallback(
+    (typedField: Field, value: string) => {
+      dispatch(typeInput({ field: typedField, value }));
+    },
+    [openModal],
+  );
+
   return {
     handleClickSelectButton,
     selectFieldCurrency,
     handleSwitchFields,
+    handleTypeAction,
   };
 };

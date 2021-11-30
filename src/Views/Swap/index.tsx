@@ -28,7 +28,7 @@ export default function SwapView() {
             onClick={handleSwitchFields}>
             <IRefresh />
           </Button>
-          <SwapInputPanel field={Field.TO} />
+          <SwapInputPanel disabled field={Field.TO} />
         </div>
         <div className={styles.footer}>
           {address ? (

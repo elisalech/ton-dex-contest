@@ -19,11 +19,15 @@ const inputRegex = RegExp('^[0-9]*.?[0-9]*$');
 
 interface SwapInputPanelProps {
   field: Field;
+  disabled?: boolean;
 }
 
-export default function SwapInputPanel({ field }: SwapInputPanelProps) {
+export default function SwapInputPanel({
+  field,
+  disabled,
+}: SwapInputPanelProps) {
   const [numValue, setNumValue] = useState('');
-  const { handleClickSelectButton } = useSwapActions();
+  const { handleClickSelectButton, handleTypeAction } = useSwapActions();
   const token = useFieldToken(field);
   const balance = useTokenBalance(token);
 
@@ -33,6 +37,7 @@ export default function SwapInputPanel({ field }: SwapInputPanelProps) {
 
       if (nextValue === '' || inputRegex.test(nextValue)) {
         setNumValue(nextValue);
+        handleTypeAction(field, nextValue);
       }
     },
     [setNumValue],
@@ -57,7 +62,12 @@ export default function SwapInputPanel({ field }: SwapInputPanelProps) {
         )}
       </Row>
       <Row fullWidth>
-        <Input value={numValue} onChange={handleChange} />
+        <Input
+          placeholder="0.0"
+          disabled={disabled}
+          value={numValue}
+          onChange={handleChange}
+        />
 
         <SelectCurrencyButton
           onClick={() => handleClickSelectButton(field)}
