@@ -14,10 +14,11 @@ export const useSwapState = () => {
   const balance = useTokenBalance(tokenFrom);
 
   const canSwap = useMemo(() => {
-    if (!balance || !typedValue) return false;
+    if (!balance || !typedValue || !tokenTo || !tokenFrom) return false;
     if (parseFloat(balance.amount) < parseFloat(typedValue)) return false;
+
     return true;
-  }, [balance, typedValue]);
+  }, [balance, typedValue, tokenTo, tokenFrom]);
 
   const toValue = useMemo(
     () => (typedValue ? parseFloat(typedValue) * MOCK_COST_RATES : ''),

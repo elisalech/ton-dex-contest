@@ -12,11 +12,14 @@ import { useUserState } from 'hooks/useUserState';
 import IRefresh from 'components/Icons/IRefresh';
 import { useSwapActions } from 'hooks/useSwapActions';
 import { useSwapState } from 'hooks/useSwapState';
+import Text from 'components/Text';
+import { Row } from 'components/Layout';
+import { MOCK_COST_RATES } from 'mocks/costRate';
 
 export default function SwapView() {
   const { handleConnect, address } = useUserState();
   const { handleSwitchFields, handleSwap } = useSwapActions();
-  const { canSwap } = useSwapState();
+  const { canSwap, tokenFrom, tokenTo } = useSwapState();
 
   return (
     <main className={styles.container}>
@@ -32,11 +35,35 @@ export default function SwapView() {
           </Button>
           <SwapInputPanel disabled field={Field.TO} />
         </div>
+        <Row>
+          <Text color="black" weight="bold" size="small">
+            Slippage Tolerance:
+          </Text>
+          <Text>1%</Text>
+        </Row>
+        {tokenFrom && tokenTo && (
+          <>
+            <Row>
+              <Text
+                color="black"
+                weight="bold"
+                size="small">{`${tokenFrom?.symbol} per ${tokenTo?.symbol}:`}</Text>
+              <Text>{MOCK_COST_RATES}</Text>
+            </Row>
+            <Row>
+              <Text
+                color="black"
+                weight="bold"
+                size="small">{`${tokenTo?.symbol} per ${tokenFrom?.symbol}:`}</Text>
+              <Text>{1 / MOCK_COST_RATES}</Text>
+            </Row>
+          </>
+        )}
         <div className={styles.footer}>
           {address ? (
             <Button
               disabled={!canSwap}
-              onClick={handleSwap}
+              onClick={canSwap ? handleSwap : () => {}}
               startIcon={canSwap && <IWallet width={22} height={22} />}>
               {canSwap ? 'Buy' : 'Enter valid amount'}
             </Button>
