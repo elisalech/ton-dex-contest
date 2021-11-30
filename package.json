@@ -1,5 +1,6 @@
 {
   "name": "ton-dex-contest",
+  "homepage": "https://elisalech.github.io/ton-dex-contest/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +17,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +51,7 @@
     "eslint-config-airbnb-typescript": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.5.0",
     "typescript": "^4.5.2"
   }
