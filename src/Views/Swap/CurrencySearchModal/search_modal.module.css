@@ -43,3 +43,7 @@
 .fav_close:hover {
   opacity: 0.7;
 }
+
+.input_wrap {
+  padding: 0 10px;
+}

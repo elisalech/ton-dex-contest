@@ -9,9 +9,10 @@ import useFilteredTokens from 'hooks/useFilteredTokens';
 
 import Input from 'components/Input/Input';
 
-import styles from './search_modal.module.css';
 import CurrencyList from './CurrencyList';
 import FavouriteList from './FavouriteList';
+
+import styles from './search_modal.module.css';
 
 interface CurrencySearchModalProps {
   onDismiss?: () => void;
@@ -33,7 +34,9 @@ export default function CurrencySearchModal(props: CurrencySearchModalProps) {
   return (
     <Modal onDismiss={props.onDismiss} title="Select a Token">
       <div className={styles.container}>
-        <Input value={searchQuery} onChange={handleChange} autoFocus />
+        <div className={styles.input_wrap}>
+          <Input value={searchQuery} onChange={handleChange} autoFocus />
+        </div>
         <FavouriteList selectFieldCurrency={selectFieldCurrency} />
         <CurrencyList
           // @ts-ignore
