@@ -48,14 +48,14 @@ export default function SwapView() {
                 color="black"
                 weight="bold"
                 size="small">{`${tokenFrom?.symbol} per ${tokenTo?.symbol}:`}</Text>
-              <Text>{MOCK_COST_RATES}</Text>
+              <Text>{1 / MOCK_COST_RATES}</Text>
             </Row>
             <Row>
               <Text
                 color="black"
                 weight="bold"
                 size="small">{`${tokenTo?.symbol} per ${tokenFrom?.symbol}:`}</Text>
-              <Text>{1 / MOCK_COST_RATES}</Text>
+              <Text>{MOCK_COST_RATES}</Text>
             </Row>
           </>
         )}
