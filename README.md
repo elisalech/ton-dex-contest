@@ -16,5 +16,5 @@ project build with yarn
 
 - [ ] add responsive layout
 - [ ] fix create-liquidity logic
-- [ ] add pages lazy loading
+- [x] add pages lazy loading
 - [ ] add dark theme
