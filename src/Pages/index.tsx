@@ -3,10 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AppRoutes } from './types';
 
+import PoolPage from './PoolPage';
+
 const HomePage = lazy(() => import('./HomePage'));
 const SwapPage = lazy(() => import('./SwapPage'));
 const PoolsPage = lazy(() => import('./PoolsPage'));
-const PoolPage = lazy(() => import('./PoolPage'));
 const CreateLiquidityPage = lazy(() => import('./CreateLiquidityPage'));
 
 export default function Pages() {
