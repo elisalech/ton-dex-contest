@@ -15,7 +15,7 @@ import { Button } from 'components/Button/Button';
 
 export default function PoolsView() {
   useFetchPools();
-  const { poolsData } = usePoolsState();
+  const { poolsData, isLoading } = usePoolsState();
   const watchlistData = useWatchlistPools();
 
   return (
@@ -28,11 +28,11 @@ export default function PoolsView() {
       </Row>
       <section className={style.section}>
         <Headline className={style.title}>Watchlist pools:</Headline>
-        <PoolsTable poolDatas={watchlistData} />
+        <PoolsTable loading={isLoading} poolDatas={watchlistData} />
       </section>
       <section className={style.section}>
         <Headline className={style.title}>All pools:</Headline>
-        <PoolsTable poolDatas={poolsData} />
+        <PoolsTable loading={isLoading} poolDatas={poolsData} />
       </section>
     </main>
   );
