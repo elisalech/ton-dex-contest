@@ -32,6 +32,7 @@
 
 .text {
   color: var(--text-color-primary);
+  background-color: inherit;
 }
 
 .text:hover {
@@ -62,7 +63,13 @@
   color: var(--text-color-blue);
 }
 
-.disabled {
-  background-color: rgb(214, 214, 214) !important;
+.disabled,
+.disabled:hover {
+  background-color: rgb(214, 214, 214);
   cursor: not-allowed;
+}
+
+.text.disabled {
+  background-color: inherit;
+  opacity: 0.5;
 }
