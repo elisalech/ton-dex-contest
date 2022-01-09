@@ -8,6 +8,22 @@
   background-color: #fff;
 }
 
+.drawer_btn {
+  padding: 4px;
+  cursor: pointer;
+  display: none;
+}
+
+@media screen and (max-width: 576px) {
+  .desktop {
+    display: none;
+  }
+
+  .drawer_btn {
+    display: block;
+  }
+}
+
 .home {
   margin-right: 18px;
 }
@@ -15,14 +31,6 @@
 .nav-wrap {
   margin-left: 40px;
   display: flex;
-}
-
-.nav-link {
-  padding: 6px 12px;
-}
-
-:global(.active) .nav-text {
-  color: var(--text-color-primary);
 }
 
 .accountButton {
