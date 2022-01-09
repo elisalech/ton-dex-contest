@@ -14,7 +14,7 @@
   display: none;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 600px) {
   .desktop {
     display: none;
   }
@@ -31,9 +31,6 @@
 .nav-wrap {
   margin-left: 40px;
   display: flex;
-}
-
-.accountButton {
 }
 
 .address {
