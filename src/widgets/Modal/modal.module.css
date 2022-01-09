@@ -9,6 +9,11 @@
   bottom: 0;
   left: 0;
   z-index: calc(var(--zIndex-modal) - 1);
+  visibility: hidden;
+}
+
+.shown.container {
+  visibility: visible;
 }
 
 .base {
@@ -38,10 +43,38 @@
   opacity: 0;
   background: #244152;
   z-index: 10;
-  transition: opacity 0.4s;
+  transition: all 0.2s;
   backdrop-filter: blur(3px) !important;
 }
 
-.overlay__shown {
+.shown .overlay {
   opacity: 0.7;
+}
+
+.drawer {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 250px;
+  height: 100%;
+
+  padding: 20px;
+
+  box-shadow: 0px 16px 32px rgba(73, 71, 124, 0.24);
+
+  transform: translateX(-110%);
+  transition: transform 0.2s ease-out;
+  z-index: var(--zIndex-modal);
+  background-color: var(--bg-color-primary);
+}
+
+.shown.drawer {
+  transform: translateX(0);
+}
+
+.drawer_header {
+  margin-bottom: 30px;
+}
+
+.nav-wrap {
 }

@@ -1,12 +1,14 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { AppRoutes } from './types';
 
-import HomePage from './HomePage';
-import SwapPage from './SwapPage';
-import PoolsPage from './PoolsPage';
 import PoolPage from './PoolPage';
-import CreateLiquidityPage from './CreateLiquidityPage';
+
+const HomePage = lazy(() => import('./HomePage'));
+const SwapPage = lazy(() => import('./SwapPage'));
+const PoolsPage = lazy(() => import('./PoolsPage'));
+const CreateLiquidityPage = lazy(() => import('./CreateLiquidityPage'));
 
 export default function Pages() {
   return (

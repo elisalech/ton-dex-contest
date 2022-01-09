@@ -9,11 +9,12 @@ import { Button } from 'components/Button/Button';
 import IArrowLeft from 'components/Icons/IArrowLeft';
 import IArrowRight from 'components/Icons/IArrowRight';
 import { Column, Row } from 'components/Layout';
-import ILoading from 'components/Icons/ILoading';
+import { SkeletonBox } from 'components/SkeletonBox/SkeletonBox';
 
 import PoolsTableRow from './PoolsTableRow';
 
 import styles from './pool_table.module.css';
+import classnames from 'libs/classnames';
 
 const ITEMS_PER_PAGE_OPTIONS = [10, 20, 30, 40, 50, 0];
 
@@ -26,6 +27,18 @@ enum SortFields {
 interface PoolTableProps {
   poolDatas: PoolData[];
   loading?: boolean;
+}
+
+function LoaderSkeleton() {
+  return (
+    <div className={classnames(styles.grid, styles.row)}>
+      <SkeletonBox />
+      <SkeletonBox />
+      <SkeletonBox />
+      <SkeletonBox />
+      <SkeletonBox />
+    </div>
+  );
 }
 
 const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
@@ -82,9 +95,11 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
         </div>
       )}
       {loading ? (
-        <Text color="blue" size="big">
-          <ILoading />
-        </Text>
+        <>
+          <LoaderSkeleton />
+          <LoaderSkeleton />
+          <LoaderSkeleton />
+        </>
       ) : sortedData.length > 0 ? (
         <>
           {sortedData.map(poolData =>
@@ -129,7 +144,7 @@ const PoolTable: React.FC<PoolTableProps> = ({ poolDatas, loading }) => {
           </Row>
         </>
       ) : (
-        <Text size="big" color="gray">
+        <Text size="medium" color="gray">
           Pools not found
         </Text>
       )}

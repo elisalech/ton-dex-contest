@@ -2,5 +2,36 @@
   max-width: 1200px;
 
   margin: 40px auto;
-  padding: 0 10px;
+  padding: 0 20px;
+}
+
+.responsive_row {
+  display: flex;
+
+  align-items: flex-start;
+}
+
+.img_wrap {
+  width: 75%;
+  max-width: 450px;
+}
+
+.img_wrap img {
+  width: 100%;
+}
+
+.headline {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .responsive_row {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .img_wrap {
+    width: 100%;
+    margin-bottom: 40px;
+  }
 }

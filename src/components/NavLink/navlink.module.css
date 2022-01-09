@@ -1,0 +1,7 @@
+.link {
+  padding: 6px 12px;
+}
+
+:global(.active) .text {
+  color: var(--text-color-primary);
+}

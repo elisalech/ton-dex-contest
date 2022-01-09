@@ -1,8 +1,8 @@
 import { useFetchPools } from 'hooks/useFetchPools';
 import { usePoolState } from 'hooks/usePoolState';
 
+import PageLoadingView from 'components/PageLoadingView';
 import Headline from 'components/Headline';
-import ILoading from 'components/Icons/ILoading';
 
 import PoolStats from './PoolStats';
 
@@ -15,7 +15,7 @@ export default function PoolView() {
   return (
     <main className={styles.container}>
       {isLoading ? (
-        <ILoading />
+        <PageLoadingView />
       ) : data ? (
         <PoolStats data={data} />
       ) : (
