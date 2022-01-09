@@ -12,7 +12,7 @@ export default function WalletButton() {
 
   return address ? (
     <Button size="small" variant="outline" className={styles.accountButton}>
-      <Text size="small" color="inherit" className={styles.balance}>
+      <Text size="small" color="inherit">
         {tonBalance} Toncoin
       </Text>{' '}
       <Text color="inherit" className={styles.address}>
@@ -20,8 +20,8 @@ export default function WalletButton() {
       </Text>
     </Button>
   ) : (
-    <Button loading={loading} onClick={handleConnect}>
-      Connect wallet
+    <Button size="small" loading={loading} onClick={handleConnect}>
+      <Text color="inherit">Connect wallet</Text>
     </Button>
   );
 }

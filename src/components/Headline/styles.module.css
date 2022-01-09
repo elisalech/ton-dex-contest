@@ -14,3 +14,15 @@
   font-size: 30px;
   line-height: 40px;
 }
+
+@media screen and (max-width: 600px) {
+  .big {
+    font-size: 34px;
+    line-height: 42px;
+  }
+
+  .medium {
+    font-size: 26px;
+    line-height: 30px;
+  }
+}
