@@ -27,11 +27,11 @@ export default function PoolsView() {
         </Link>
       </Row>
       <section className={style.section}>
-        <Headline className={style.title}>Watchlist pools:</Headline>
+        <Headline className={style.title}>Watchlist pools</Headline>
         <PoolsTable loading={isLoading} poolDatas={watchlistData} />
       </section>
       <section className={style.section}>
-        <Headline className={style.title}>All pools:</Headline>
+        <Headline className={style.title}>All pools</Headline>
         <PoolsTable loading={isLoading} poolDatas={poolsData} />
       </section>
     </main>

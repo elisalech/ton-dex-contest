@@ -7,7 +7,6 @@ import formatUsdAmount from 'utils/formatUsdAmount';
 
 import Text from 'components/Text';
 import { Row } from 'components/Layout';
-import IExternal from 'components/Icons/IExternal';
 import { DoubleCurrencyLogo } from 'components/CurrencyLogo/CurrencyLogo';
 
 import styles from './pool_table.module.css';
@@ -19,10 +18,7 @@ export default function PoolsTableRow({ poolData }: { poolData: PoolData }) {
     <Link
       to={`${AppRoutes.POOL}/${poolData.pair}`}
       className={classnames(styles.grid, styles.row)}>
-      <Row>
-        <IExternal width="16" height="16" />
-        <Text color="blue">{truncateHash(poolData.pair)}</Text>
-      </Row>
+      <Text color="blue">{truncateHash(poolData.pair)}</Text>
       <Row justifyContent="start">
         <DoubleCurrencyLogo
           address0={poolData.token0.address}
@@ -33,13 +29,13 @@ export default function PoolsTableRow({ poolData }: { poolData: PoolData }) {
           {poolData.token0.symbol}/{poolData.token1.symbol}
         </Text>
       </Row>
-      <Text color="gray" size="medium">
-        {formatUsdAmount(poolData.reserveUSD)} $
+      <Text color="gray" size="small">
+        {formatUsdAmount(poolData.reserveUSD, true)} $
       </Text>
-      <Text color="gray" size="medium">
-        {formatUsdAmount(poolData.volumeUSD24h)} $
+      <Text color="gray" size="small">
+        {formatUsdAmount(poolData.volumeUSD24h, true)} $
       </Text>
-      <Text color="gray" size="medium">
+      <Text color="gray" size="small">
         {poolData.apy}%
       </Text>
     </Link>
